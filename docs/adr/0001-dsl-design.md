@@ -38,6 +38,25 @@ C hello, world examples
 - token from 8 to 9 (;) with scopes C, meta.block.c, punctuation.terminator.statement.c
 ```
 
+```movable
+directory, filename
+# alias pkg :directory
+# alias string.quoted.other.lt-gt.include.c import
+# alias storage.type.built-in.primitive.c type
+# alias meta.function.c entity.name.function.c function_name
+# alias meta.function-call.c entity.name.function.c callee
+# alias meta.function-call.c, string.quoted.double.c parameter string
+# alias meta.block.c, keyword.control.c keyword
+# alias constant.numeric.decimal.c number
+```
+
+or
+
+```movable
+# alias meta.function-call.c -> string.quoted.double.c parameter string
+```
+
+
 ## Decision
 
 Decision here...
