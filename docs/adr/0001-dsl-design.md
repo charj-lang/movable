@@ -56,6 +56,39 @@ or
 # alias meta.function-call.c -> string.quoted.double.c parameter string
 ```
 
+Basic rules
+
+### PoC
+
+**structure by structure**
+
+```
+class A {
+	constructure() {}
+}
+```
+
+or
+
+```
+struct A {}
+
+impl A {
+	new() -> Self {};
+}
+```
+
+
+**expr by regex templates**
+
+```
+(+ 2 2)
+```
+
+```
+a = 2 + 2
+```
+
 
 ## Decision
 
