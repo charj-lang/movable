@@ -1,5 +1,5 @@
 [package]
-name = "movable"
+name = "typography"
 version = "0.1.0"
 authors = ["Phodal Huang <h@phodal.com>"]
 edition = "2018"
@@ -7,8 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+lalrpop-util = "0.19.1"
+regex = "1"
 
-[workspace]
-members = [
-    'typography'
-]
+# Add a build-time dependency on the lalrpop library:
+[build-dependencies.lalrpop]
+version = "0.19.1"
+features = ["lexer"]
