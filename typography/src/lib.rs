@@ -7,5 +7,9 @@ lalrpop_mod!(
     pub typography
 );
 
+pub mod error;
 pub mod lexer;
+pub mod location;
+pub mod parse_tree;
 pub mod parser;
+pub mod token;

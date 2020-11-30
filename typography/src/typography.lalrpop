@@ -1,7 +1,34 @@
-use crate::lexer;
+use crate::lexer::{Lexer};
+use crate::error::{LexicalError};
+use crate::location::Location;
+use crate::token::Token;
+use crate::parse_tree::*;
 
 grammar<'input>(input: &'input str);
 
 pub Typography: SourceUnit = {
-
+    SourceUnitPart+ => SourceUnit(<>)
 };
+
+SourceUnitPart: SourceUnitPart = {
+    TypographyDefinition => SourceUnitPart::TypographyDefinition(<>)
+}
+
+TypographyDefinition: Box<TypographyDefinition> = {
+    <l:@L> "typo" "{" "}" <r:@R> => {
+        Box::new(TypographyDefinition {
+            location: Location::new(l, r)
+        })
+    }
+}
+
+extern {
+    type Location = usize;
+    type Error = LexicalError;
+
+    enum Token<'input> {
+        "{" => Token::OpenCurlyBrace,
+        "}" => Token::CloseCurlyBrace,
+        "typo" => Token::Typo,
+    }
+}
