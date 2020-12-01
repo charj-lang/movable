@@ -31,11 +31,35 @@ QUOTE: '"' ;
 ARROW: '->' ;
 DOUBLE_ARROW: '=>' ;
 
+QUESTION
+   : Question
+   ;
+
+STAR
+   : Star
+   ;
+
+PLUS
+   : Plus
+   ;
+
 
 WS:                 [ \t\r\n\u000C]+ -> channel(HIDDEN);
 COMMENT:            '/*' .*? '*/'    -> channel(HIDDEN);
 LINE_COMMENT:       '//' ~[\r\n]*    -> channel(HIDDEN);
 
+
+fragment Question
+   : '?'
+   ;
+
+fragment Star
+   : '*'
+   ;
+
+fragment Plus
+   : '+'
+   ;
 
 Identifier
     : (Nondigit| UniversalCharacterName)+
