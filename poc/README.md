@@ -10,9 +10,13 @@ int main() {
 define default$identifier -> [a-zA-Z_]
 keywords$DOT -> '.'
 
-symbol$import -> '#' 'include'
+symbol$import -> '#' 'include' template$source
 template$source#1 -> '<' identifier '>'
 template$source#2 -> '<' identifier DOT 'h' '>'
+
+# impl$import -> 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
+# impl$template.source -> 'punctuation.definition.string.begin.c' identifier 'punctuation.definition.string.end.c'
+
 parameters -> @type identifier (',' @type identifier)?
 
 type$int -> int
