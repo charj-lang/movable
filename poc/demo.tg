@@ -35,7 +35,7 @@ tokenizer extends typo$c.default {
   lt -> '<'
 }
 
-rule template$import {
+rule import {
   '#' 'include' '<' identifier '>'
 | '#' 'include' '<' identifier @DOT 'h' '>'
 }
@@ -65,14 +65,14 @@ ast {
 }
 
 typo {
-  impl$import {
+  import {
      template: '#' 'include'
      impl: 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
   }
-  impl$template.source {
+  template.source {
     'punctuation.definition.string.begin.c' identifier 'punctuation.definition.string.end.c'
   }
-  impl$function {
+  function {
 
   }
 }

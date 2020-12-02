@@ -17,6 +17,13 @@ pub struct Lexer<'input> {
 static KEYWORDS: phf::Map<&'static str, Token> = phf_map! {
     "spec"  => Token::Spec,
     "options"  => Token::Options,
+    "typo"  => Token::Typo,
+    "default"  => Token::Default,
+    "rule"  => Token::Tokenizer,
+    "node"  => Token::Node,
+    "ast"  => Token::Ast,
+    "template"  => Token::Template,
+    "impl"  => Token::Impl,
 };
 
 impl<'input> Lexer<'input> {
