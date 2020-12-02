@@ -1,0 +1,42 @@
+// ruleset C.movable
+
+type$int -> int;
+type$string -> string;
+
+default$identifier -> [a-zA-Z_] ;
+default$parameters -> @type @identifier (',' @type @identifier)?;
+
+keywords$DOT -> '.';
+
+spec {
+
+}
+
+// Type
+
+
+// delimiters
+
+symbol$raw_string -> '"""'
+symbol$end_line -> ';'
+symbol$DOT -> '.'
+
+import -> '#' 'include' template$source
+template$source#1 -> '<' identifier '>'
+template$source#2 -> '<' identifier @DOT 'h' '>'
+
+function:
+  @type @name '(' @parameters ')' '{'
+    @block
+  '}'
+
+block: @expr+
+
+expr
+  : @call '(' ')'  @end_line
+  | @return int @end_line
+
+impl c.movable
+
+impl$import -> 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
+impl$template.source -> 'punctuation.definition.string.begin.c' identifier 'punctuation.definition.string.end.c'

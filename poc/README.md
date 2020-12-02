@@ -7,15 +7,14 @@ int main() {
 ```
 
 ```antlr
-// ruleset C.movable
+ruleset C
 
 ## DEFAULT Rule
 
-define default$identifier -> [a-zA-Z_]
+default$identifier -> [a-zA-Z_]
 keywords$DOT -> '.'
 parameters -> @type identifier (',' @type identifier)?
 
-//
 spec {
 
 }
@@ -45,12 +44,10 @@ block: @expr+
 expr
   : @call '(' ')'  @end_line
   | @return number @end_line
-```
 
-```
+
 impl c.movable
 
 impl$import -> 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
 impl$template.source -> 'punctuation.definition.string.begin.c' identifier 'punctuation.definition.string.end.c'
-
 ```

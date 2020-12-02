@@ -1,12 +1,37 @@
 grammar movable;
 
 movable
-    : defineDecl
+    : defineDecl* EOF
     ;
 
 defineDecl
-    : Identifier DOLLOAR Identifier ARROW ;
+    : ruleDecl
+    | templateDecl
+    | specDecl
+    ;
 
+ruleDecl
+    : DEFINE? Identifier DOLLOAR Identifier ARROW ruleExpr* ';'
+    ;
+
+ruleExpr
+    : '@' Identifier
+    | lineStringLiteral
+    ;
+
+
+templateDecl
+    : Identifier DOLLOAR Identifier '#' INT  ARROW ruleExpr* ';'
+    | functionDecl
+    ;
+
+specDecl
+    : SPEC
+    ;
+
+functionDecl
+    : 'function' ':' ruleDecl
+    ;
 
 lineStringLiteral
     : '#'
@@ -16,16 +41,18 @@ lineStringLiteral
 // keywords
 DEFINE: 'define';
 TYPE: 'type';
-FUNCTION: 'function' ;
+FUNCTION: 'function';
+SPEC: 'spec';
 
 //symbol
-AT: '@' ;
-DOT: '.' ;
-DOLLOAR: '$';
-HASH: '#' ;
-SINGLE_QUOTE: '\'' ;
-QUOTE: '"' ;
-//QUOTE_CLOSE: '"';
+AT:                 '@';
+DOT:                '.';
+DOLLOAR:            '$';
+HASH:               '#';
+SINGLE_QUOTE:       '\'';
+QUOTE:              '"';
+LBRACE:             '{';
+RBRACE:             '}';
 
 // companion
 ARROW: '->' ;
@@ -47,7 +74,6 @@ PLUS
 WS:                 [ \t\r\n\u000C]+ -> channel(HIDDEN);
 COMMENT:            '/*' .*? '*/'    -> channel(HIDDEN);
 LINE_COMMENT:       '//' ~[\r\n]*    -> channel(HIDDEN);
-
 
 fragment Question
    : '?'
@@ -81,3 +107,20 @@ fragment HexQuad
 fragment HexadecimalDigit
     :   [0-9a-fA-F]
     ;
+
+INT
+   : DecimalNumeral
+   ;
+
+fragment DecimalNumeral
+   : '0'
+   | [1-9] DecDigit*
+   ;
+
+fragment HexDigit
+   : [0-9a-fA-F]
+   ;
+
+fragment DecDigit
+   : [0-9]
+   ;
