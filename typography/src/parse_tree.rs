@@ -19,11 +19,8 @@ impl SpecDecl {}
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Options {
     pub name: Option<String>,
-    pub extensions: Vec<String>
+    pub extensions: Vec<String>,
 }
-
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct Tokenizer {
-
-}
+pub struct Tokenizer {}

@@ -14,7 +14,6 @@ pub mod parse_tree;
 pub mod parser;
 pub mod token;
 
-
 #[cfg(test)]
 mod test {
     use crate::parser::parse_program;
