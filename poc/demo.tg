@@ -3,9 +3,9 @@
 
 options {
   // todo: design builtin
-  // builtin = c.builtin.tg
-  // name: 'C'
-  // extensions: ['.c', '.h']
+  // builtin -> c.builtin.tg
+  // name  -> 'C'
+  // extensions -> ['.c', '.h']
 }
 
 // lexer
@@ -15,8 +15,8 @@ typo$c.default {
 
   // default ?
   type {
-    int: 'int',
-    string: 'string'
+    int -> 'int',
+    string -> 'string'
   }
 
   parameters -> @type @identifier (',' @type @identifier)?;
