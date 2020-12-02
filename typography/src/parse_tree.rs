@@ -7,10 +7,16 @@ pub struct TypoGrammar(pub Vec<GrammarUnit>);
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum GrammarUnit {
     SpecDecl(Box<SpecDecl>),
+    OptionsDecl(Box<OptionsDecl>),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct SpecDecl {
+    pub location: Location,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct OptionsDecl {
     pub location: Location,
 }
 

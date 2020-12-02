@@ -16,3 +16,16 @@ macro_rules! do_lalr_parsing {
 pub fn parse_program(source: &str) -> Result<TypoGrammar, Diagnostic> {
     do_lalr_parsing!(source)
 }
+
+#[cfg(test)]
+mod test {
+    use crate::parser::parse_program;
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_parse_empty_options() {
+        let parse_ast = parse_program("options {}");
+        println!("{:?}", parse_ast);
+        // assert!(parse_ast.is_ok());
+    }
+}

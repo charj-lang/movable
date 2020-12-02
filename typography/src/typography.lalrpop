@@ -11,12 +11,21 @@ pub Typography: TypoGrammar = {
 };
 
 GrammarUnit: GrammarUnit = {
-    SpecDecl => GrammarUnit::SpecDecl(<>)
+    SpecDecl => GrammarUnit::SpecDecl(<>),
+    OptionsDecl => GrammarUnit::OptionsDecl(<>)
 }
 
 SpecDecl: Box<SpecDecl> = {
     <l:@L> "spec" "{" "}" <r:@R> => {
         Box::new(SpecDecl {
+            location: Location::new(l, r)
+        })
+    }
+}
+
+OptionsDecl: Box<OptionsDecl> = {
+    <l:@L> "options" "{" "}" <r:@R> => {
+        Box::new(OptionsDecl {
             location: Location::new(l, r)
         })
     }
@@ -30,5 +39,6 @@ extern {
         "{" => Token::OpenCurlyBrace,
         "}" => Token::CloseCurlyBrace,
         "spec" => Token::Spec,
+        "options" => Token::Options,
     }
 }
