@@ -1,0 +1,79 @@
+// inspired by fall & antlr
+// ruleset C.movable
+
+// lexer
+default {
+  identifier -> [a-zA-Z_];
+
+  type {
+    int: int,
+    string: string
+  }
+
+  parameters -> @type @identifier (',' @type @identifier)?;
+}
+
+spec {
+  // name: 'C'
+  // extensions: ['.c', '.h']
+  #[contextual]$node 'node'
+
+  // delimiters
+  symbol$raw_string -> '"""'
+  symbol$end_line -> ';'
+  symbol$dot -> '.'
+  symbol$gt -> '>'
+  symbol$lt -> '<'
+}
+
+rule template$import
+    : '#' 'include' '<' identifier '>'
+    | '#' 'include' '<' identifier @DOT 'h' '>'
+    ;
+
+// or
+
+rule template$import {
+  '#' 'include' '<' identifier '>'
+| '#' 'include' '<' identifier @DOT 'h' '>'
+}
+
+rule template$import#1 -> '#' 'include' '<' identifier '>'
+rule template$import#2 -> '#' 'include' '<' identifier @DOT 'h' '>'
+
+rule function {
+  @type @name '(' @parameters ')' '{' @block '}'
+}
+
+rule block {
+  @expr+
+}
+
+rule expr {
+  @call '(' ')'  @end_line | @return int @end_line
+}
+
+// todo: prepare to code generate
+// inspired by fall
+ast {
+  node parameters {
+    parameters parameter*
+  }
+
+  node parameter {
+    name ident.text
+  }
+}
+
+typo {
+  impl$import {
+     template: '#' 'include'
+     impl: 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
+  }
+  impl$template.source {
+    'punctuation.definition.string.begin.c' identifier 'punctuation.definition.string.end.c'
+  }
+  impl$function {
+
+  }
+}
