@@ -1,6 +1,13 @@
 // inspired by fall & antlr
 // ruleset C.movable
 
+options {
+  // todo: design builtin
+  // builtin = c.builtin.tg
+  // name: 'C'
+  // extensions: ['.c', '.h']
+}
+
 // lexer
 default {
   identifier -> [a-zA-Z_];
@@ -13,33 +20,21 @@ default {
   parameters -> @type @identifier (',' @type @identifier)?;
 }
 
-spec {
-  // name: 'C'
-  // extensions: ['.c', '.h']
+tokenizer {
   #[contextual]$node 'node'
 
   // delimiters
-  symbol$raw_string -> '"""'
-  symbol$end_line -> ';'
-  symbol$dot -> '.'
-  symbol$gt -> '>'
-  symbol$lt -> '<'
+  raw_string -> '"""'
+  end_line -> ';'
+  dot -> '.'
+  gt -> '>'
+  lt -> '<'
 }
-
-rule template$import
-    : '#' 'include' '<' identifier '>'
-    | '#' 'include' '<' identifier @DOT 'h' '>'
-    ;
-
-// or
 
 rule template$import {
   '#' 'include' '<' identifier '>'
 | '#' 'include' '<' identifier @DOT 'h' '>'
 }
-
-rule template$import#1 -> '#' 'include' '<' identifier '>'
-rule template$import#2 -> '#' 'include' '<' identifier @DOT 'h' '>'
 
 rule function {
   @type @name '(' @parameters ')' '{' @block '}'
@@ -53,8 +48,8 @@ rule expr {
   @call '(' ')'  @end_line | @return int @end_line
 }
 
-// todo: prepare to code generate
 // inspired by fall
+// todo: for code generate only
 ast {
   node parameters {
     parameters parameter*
