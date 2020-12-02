@@ -9,19 +9,23 @@ options {
 }
 
 // lexer
-default {
-  identifier -> [a-zA-Z_];
+typo$c.default {
+  identifier [a-zA-Z_];
+  string "[a-zA-Z_]";
 
+  // default ?
   type {
-    int: int,
-    string: string
+    int: 'int',
+    string: 'string'
   }
 
   parameters -> @type @identifier (',' @type @identifier)?;
+  variables -> @identifier (',' @identifier)?;
 }
 
-tokenizer {
-  #[contextual]$node 'node'
+tokenizer extends typo$c.default {
+  contextual$node 'node'
+  contextual$class 'class'
 
   // delimiters
   raw_string -> '"""'
@@ -51,7 +55,7 @@ rule expr {
 // inspired by fall
 // todo: for code generate only
 ast {
-  node parameters {
+  node parameters {``
     parameters parameter*
   }
 
