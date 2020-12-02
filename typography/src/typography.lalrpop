@@ -6,17 +6,17 @@ use crate::parse_tree::*;
 
 grammar<'input>(input: &'input str);
 
-pub Typography: SourceUnit = {
-    SourceUnitPart+ => SourceUnit(<>)
+pub Typography: TypoGrammar = {
+    GrammarUnit+ => TypoGrammar(<>)
 };
 
-SourceUnitPart: SourceUnitPart = {
-    TypographyDefinition => SourceUnitPart::TypographyDefinition(<>)
+GrammarUnit: GrammarUnit = {
+    SpecDecl => GrammarUnit::SpecDecl(<>)
 }
 
-TypographyDefinition: Box<TypographyDefinition> = {
-    <l:@L> "typo" "{" "}" <r:@R> => {
-        Box::new(TypographyDefinition {
+SpecDecl: Box<SpecDecl> = {
+    <l:@L> "spec" "{" "}" <r:@R> => {
+        Box::new(SpecDecl {
             location: Location::new(l, r)
         })
     }
@@ -29,6 +29,6 @@ extern {
     enum Token<'input> {
         "{" => Token::OpenCurlyBrace,
         "}" => Token::CloseCurlyBrace,
-        "typo" => Token::Typo,
+        "spec" => Token::Spec,
     }
 }

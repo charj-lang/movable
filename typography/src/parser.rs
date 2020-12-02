@@ -1,6 +1,6 @@
 use crate::error::Diagnostic;
 use crate::lexer;
-use crate::parse_tree::SourceUnit;
+use crate::parse_tree::TypoGrammar;
 use crate::typography;
 
 macro_rules! do_lalr_parsing {
@@ -13,21 +13,6 @@ macro_rules! do_lalr_parsing {
     }};
 }
 
-pub fn parse_program(source: &str) -> Result<SourceUnit, Diagnostic> {
+pub fn parse_program(source: &str) -> Result<TypoGrammar, Diagnostic> {
     do_lalr_parsing!(source)
-}
-
-#[cfg(test)]
-mod test {
-    use crate::parser::parse_program;
-
-    #[test]
-    #[rustfmt::skip]
-    fn test_parse_empty() {
-        let parse_ast = parse_program("typo {
-
-}");
-        println!("{:?}", parse_ast);
-        assert!(parse_ast.is_ok());
-    }
 }

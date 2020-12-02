@@ -1,16 +1,16 @@
 use crate::location::Location;
 
 #[derive(Debug, PartialEq)]
-pub struct SourceUnit(pub Vec<SourceUnitPart>);
+pub struct TypoGrammar(pub Vec<GrammarUnit>);
 
 #[derive(Debug, PartialEq)]
-pub enum SourceUnitPart {
-    TypographyDefinition(Box<TypographyDefinition>),
+pub enum GrammarUnit {
+    SpecDecl(Box<SpecDecl>),
 }
 
 #[derive(Debug, PartialEq)]
-pub struct TypographyDefinition {
+pub struct SpecDecl {
     pub location: Location,
 }
 
-impl TypographyDefinition {}
+impl SpecDecl {}

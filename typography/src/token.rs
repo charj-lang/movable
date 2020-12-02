@@ -5,7 +5,7 @@ pub enum Token<'input> {
     Identifier(&'input str),
     OpenCurlyBrace,
     CloseCurlyBrace,
-    Typo,
+    Spec,
 }
 
 impl<'input> fmt::Display for Token<'input> {
@@ -15,7 +15,7 @@ impl<'input> fmt::Display for Token<'input> {
             Identifier(id) => write!(f, "{}", id),
             OpenCurlyBrace => write!(f, "{{"),
             CloseCurlyBrace => write!(f, "}}"),
-            Typo => write!(f, "typo"),
+            Spec => write!(f, "spec"),
         }
     }
 }
