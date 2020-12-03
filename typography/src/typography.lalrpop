@@ -25,7 +25,7 @@ SpecDecl: Box<SpecDecl> = {
 };
 
 OptionsDecl: Box<OptionsDecl> = {
-    <l:@L> "options" "{" <properties:(<PropertyDecl> ";")*> "}" <r:@R> => {
+    <l:@L> "options" "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
         Box::new(OptionsDecl {
             location: Location::new(l, r),
             properties

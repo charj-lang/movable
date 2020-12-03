@@ -44,4 +44,16 @@ mod test {
         }
         assert!(name_equal_name);
     }
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_parse_multiple_options() {
+        let parse_ast = parse_program("options{ \
+    name -> 'C';
+    name2 -> 'C';
+//    extensions -> \"c\";
+}");
+        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
 }

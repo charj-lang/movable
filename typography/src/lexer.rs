@@ -172,6 +172,13 @@ impl<'input> Lexer<'input> {
                 Some((i, '{')) => return Some(Ok((i, Token::OpenCurlyBrace, i + 1))),
                 Some((i, '}')) => return Some(Ok((i, Token::CloseCurlyBrace, i + 1))),
                 Some((idx0, '\'')) => return Some(self.lifetimeish(idx0)),
+                Some((i, '/')) => match self.bump() {
+                    Some((_, '/')) => {
+                        self.take_until(|c| c == '\n');
+                        continue;
+                    }
+                    _ => return Some(Ok((i, Token::Divide, i + 1))),
+                },
                 Some((i, '-')) => {
                     return match self.chars.peek() {
                         Some((_, '>')) => {

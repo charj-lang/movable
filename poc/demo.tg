@@ -5,7 +5,7 @@ options {
   // todo: design builtin
   // builtin -> c.builtin.tg
   // name  -> 'C'
-  // extensions -> ['.c', '.h']
+  // extensions -> ".c" | ".h"
 }
 
 // lexer
