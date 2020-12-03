@@ -1,8 +1,9 @@
 use crate::lexer::{Lexer};
-use crate::error::{LexicalError};
+use crate::error::{LexicalError, ErrorType};
 use crate::location::Location;
 use crate::token::Token;
 use crate::parse_tree::*;
+use string_cache::DefaultAtom as Atom;
 
 grammar<'input>(input: &'input str);
 
@@ -13,7 +14,7 @@ pub Typography: TypoGrammar = {
 GrammarUnit: GrammarUnit = {
     SpecDecl => GrammarUnit::SpecDecl(<>),
     OptionsDecl => GrammarUnit::OptionsDecl(<>)
-}
+};
 
 SpecDecl: Box<SpecDecl> = {
     <l:@L> "spec" "{" "}" <r:@R> => {
@@ -21,34 +22,51 @@ SpecDecl: Box<SpecDecl> = {
             location: Location::new(l, r)
         })
     }
-}
+};
 
 OptionsDecl: Box<OptionsDecl> = {
-    <l:@L> "options" "{"  "}" <r:@R> => {
+    <l:@L> "options" "{" <properties:(<PropertyDecl> ";")*> "}" <r:@R> => {
         Box::new(OptionsDecl {
             location: Location::new(l, r),
-            // properties
+            properties
         })
     }
-}
-//
-//PropertyDecl: Box<PropertyDecl> = {
-//  <l:@L> <r:@R> => {
-//}
+};
+
+PropertyDecl: Box<PropertyDecl> = {
+    <l:@L> <name:StringLiteral> "->" <pattern:PatternKind> <r:@R> => {
+        Box::new(PropertyDecl {
+              location: Location::new(l, r),
+              name,
+              pattern })
+   }
+};
+
+PatternKind: PatternKind = {
+    <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
+};
+
+StringLiteral: Atom = <lo:@L> <s:"StringLiteral"> =>? {
+    Ok(Atom::from(s))
+};
 
 extern {
     type Location = usize;
     type Error = LexicalError;
 
     enum Token<'input> {
+        "StringLiteral" => Token::StringLiteral(<&'input str>),
+        "CharLiteral" => Token::CharLiteral(<&'input str>),
+
         ";" => Token::Semicolon,
         "{" => Token::OpenCurlyBrace,
         "}" => Token::CloseCurlyBrace,
         "(" => Token::OpenParenthesis,
         ")" => Token::CloseParenthesis,
         "=" => Token::Assign,
-        "->" => Token::ArrowAssign,
         "=>" => Token::Arrow,
+        "->" => Token::ArrowAssign,
+        ">" => Token::Less,
         "?" => Token::Question,
         ":" => Token::Colon,
         "+" => Token::Add,

@@ -2,7 +2,10 @@ use core::fmt;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Token<'input> {
-    Identifier(&'input str),
+    StringLiteral(&'input str),
+    CharLiteral(&'input str),
+    Lifetime(&'input str),
+
     Semicolon,
     OpenCurlyBrace,
     CloseCurlyBrace,
@@ -42,6 +45,10 @@ impl<'input> fmt::Display for Token<'input> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         use Token::*;
         match self {
+            StringLiteral(id) => write!(f, "{}", id),
+            CharLiteral(id) => write!(f, "{}", id),
+            Lifetime(id) => write!(f, "{}", id),
+
             Semicolon => write!(f, ";"),
             Comma => write!(f, ","),
             OpenParenthesis => write!(f, "("),
@@ -66,7 +73,6 @@ impl<'input> fmt::Display for Token<'input> {
             ArrowAssign => write!(f, "->"),
             Arrow => write!(f, "=>"),
 
-            Identifier(id) => write!(f, "{}", id),
             Options => write!(f, "options"),
             Spec => write!(f, "spec"),
             Typo => write!(f, "typo"),

@@ -10,6 +10,7 @@ edition = "2018"
 phf = { version = "0.8", features = ["macros"] }
 serde = { version = "1.0", features = ["derive"] }
 unicode-xid = "0.2.0"
+string_cache = "0.8"
 
 lalrpop-util = "0.19.1"
 regex = "1"
