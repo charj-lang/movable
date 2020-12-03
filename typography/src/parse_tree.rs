@@ -61,15 +61,21 @@ pub enum PatternKind {
     CharLiteral(Atom),
     StringLiteral(Atom),
     Pattern(String),
-    VariablePattern(),
+    VariablePattern(VariablePattern),
     LocalScope(LocalScopeDecl),
 }
 
-impl SpecDecl {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum MatchTime {
+    OneOrMore(), // +
+    More(),      // *
+    Optional(),  // ?
+}
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct VariablePattern {
     pub name: Atom,
+    pub match_times: Option<MatchTime>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
