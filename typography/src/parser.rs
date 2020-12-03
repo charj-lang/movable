@@ -72,6 +72,7 @@ mod test {
     fn should_parse_define() {
         let parse_ast = parse_program("define default$tokenizer {
     identifier: [a-zA-Z_];
+    string: \"[a-zA-Z_]\";
 }");
 
         println!("{:?}", parse_ast);

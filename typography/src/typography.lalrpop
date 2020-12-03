@@ -73,6 +73,14 @@ PropertyDecl: Box<PropertyDecl> = {
             pattern
         })
    },
+    <l:@L> <name:Identify> ":" <string:"StringLiteral"> ";"? <r:@R>  => {
+        let pattern = PatternKind::Pattern(string.to_string());
+        Box::new(PropertyDecl {
+            location: Location::new(l, r),
+            name,
+            pattern
+        })
+   },
 };
 
 PatternKind: PatternKind = {
