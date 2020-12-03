@@ -46,6 +46,7 @@ pub struct NameSpaceDecl {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum PatternKind {
     CharLiteral(Atom),
+    StringLiteral(Atom),
     Pattern(String),
 }
 

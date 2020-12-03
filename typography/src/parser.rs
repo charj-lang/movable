@@ -29,6 +29,16 @@ mod test {
         assert!(parse_ast.is_ok());
     }
 
+    //     #[test]
+    //     #[rustfmt::skip]
+    //     fn should_parse_string() {
+    //         let parse_ast = parse_program("options {
+    //     name -> \"C Syntax\"
+    // }");
+    //         println!("{:?}", parse_ast);
+    //         assert!(parse_ast.is_ok());
+    //     }
+
     #[test]
     #[rustfmt::skip]
     fn should_parse_options_property() {

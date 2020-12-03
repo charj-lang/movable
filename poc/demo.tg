@@ -55,7 +55,7 @@ rule expr {
 // inspired by fall
 // todo: for code generate only
 ast {
-  node parameters {``
+  node parameters {
     parameters parameter*
   }
 

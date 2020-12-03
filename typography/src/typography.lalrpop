@@ -77,6 +77,7 @@ PropertyDecl: Box<PropertyDecl> = {
 
 PatternKind: PatternKind = {
     <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
+    <c:"StringLiteral"> => PatternKind::StringLiteral(Atom::from(c)),
 };
 
 Pattern: String = <lo:@L> <s:"Pattern"> =>? {
