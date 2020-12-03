@@ -1,5 +1,6 @@
 use crate::location::Location;
 use serde::{Deserialize, Serialize};
+use string_cache::DefaultAtom as Atom;
 
 #[derive(Debug, PartialEq)]
 pub struct TypoGrammar(pub Vec<GrammarUnit>);
@@ -18,7 +19,7 @@ pub struct SpecDecl {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct OptionsDecl {
     pub location: Location,
-    // pub properties: Vec<PropertyDecl>,
+    pub properties: Vec<Box<PropertyDecl>>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -27,21 +28,15 @@ pub enum Statement {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum Expression {
-    StringLiteral { value: StringLiteral },
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct StringLiteral {
-    pub loc: Location,
-    pub string: String,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct PropertyDecl {
     pub location: Location,
-    pub name: Identifier,
-    pub value: Expression,
+    pub name: Atom,
+    pub pattern: PatternKind,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum PatternKind {
+    CharLiteral(Atom),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]

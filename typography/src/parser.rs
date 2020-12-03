@@ -31,9 +31,7 @@ mod test {
     #[test]
     #[rustfmt::skip]
     fn should_parse_options_property() {
-        let parse_ast = parse_program("options {
-    name  -> 'C'
-        }");
-        // assert!(parse_ast.is_ok());
+        let parse_ast = parse_program("options{ name -> 'C' ; }");
+        assert!(parse_ast.is_ok());
     }
 }

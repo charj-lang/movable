@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate lalrpop_util;
 
+extern crate string_cache;
+
 lalrpop_mod!(
     #[allow(clippy::all)]
     #[allow(unused)]
