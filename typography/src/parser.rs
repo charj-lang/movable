@@ -25,7 +25,15 @@ mod test {
     #[rustfmt::skip]
     fn should_parse_empty_options() {
         let parse_ast = parse_program("options {}");
-        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_parse_options_property() {
+        let parse_ast = parse_program("options {
+    name  -> 'C'
+        }");
         // assert!(parse_ast.is_ok());
     }
 }

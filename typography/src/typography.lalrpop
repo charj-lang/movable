@@ -24,20 +24,44 @@ SpecDecl: Box<SpecDecl> = {
 }
 
 OptionsDecl: Box<OptionsDecl> = {
-    <l:@L> "options" "{" "}" <r:@R> => {
+    <l:@L> "options" "{"  "}" <r:@R> => {
         Box::new(OptionsDecl {
-            location: Location::new(l, r)
+            location: Location::new(l, r),
+            // properties
         })
     }
 }
+//
+//PropertyDecl: Box<PropertyDecl> = {
+//  <l:@L> <r:@R> => {
+//}
 
 extern {
     type Location = usize;
     type Error = LexicalError;
 
     enum Token<'input> {
+        ";" => Token::Semicolon,
         "{" => Token::OpenCurlyBrace,
         "}" => Token::CloseCurlyBrace,
+        "(" => Token::OpenParenthesis,
+        ")" => Token::CloseParenthesis,
+        "=" => Token::Assign,
+        "->" => Token::ArrowAssign,
+        "=>" => Token::Arrow,
+        "?" => Token::Question,
+        ":" => Token::Colon,
+        "+" => Token::Add,
+        "-" => Token::Subtract,
+        "*" => Token::Mul,
+        "/" => Token::Divide,
+        "%" => Token::Modulo,
+        "!" => Token::Not,
+        "[" => Token::OpenBracket,
+        "]" => Token::CloseBracket,
+        "." => Token::Member,
+        "," => Token::Comma,
+
         "spec" => Token::Spec,
         "options" => Token::Options,
         "typo"  => Token::Typo,
