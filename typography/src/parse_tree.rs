@@ -54,10 +54,14 @@ pub enum PatternKind {
     CharLiteral(Atom),
     StringLiteral(Atom),
     Pattern(String),
+    VariablePattern(),
     LocalScope(LocalScopeDecl),
 }
 
 impl SpecDecl {}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct VariablePattern {}
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Options {

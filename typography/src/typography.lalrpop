@@ -97,7 +97,12 @@ PropertyDecl: Box<PropertyDecl> = {
 PatternKind: PatternKind = {
     <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
     <c:"StringLiteral"> => PatternKind::StringLiteral(Atom::from(c)),
+//    <c:VariablePattern> => PatternKind::VariablePattern(),
 };
+
+VariablePattern: VariablePattern = {
+
+}
 
 Pattern: String = <lo:@L> <s:"Pattern"> =>? {
     Ok(s.to_string())
@@ -139,6 +144,7 @@ extern {
         "." => Token::Member,
         "," => Token::Comma,
         "$" => Token::Dollar,
+        "@" => Token::At,
 
         "spec" => Token::Spec,
         "options" => Token::Options,

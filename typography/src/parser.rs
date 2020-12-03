@@ -90,4 +90,15 @@ mod test {
 
         assert!(parse_ast.is_ok());
     }
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_support_use_variables() {
+        let parse_ast = parse_program("define default$tokenizer {
+  // variables -> @identifier (',' @identifier)?;
+}");
+
+        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
 }

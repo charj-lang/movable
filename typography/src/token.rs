@@ -32,6 +32,7 @@ pub enum Token<'input> {
     More,
     Less,
     Dollar,
+    At,
 
     Options,
     Spec,
@@ -79,6 +80,7 @@ impl<'input> fmt::Display for Token<'input> {
             ArrowAssign => write!(f, "->"),
             Arrow => write!(f, "=>"),
             Dollar => write!(f, "$"),
+            At => write!(f, "@"),
 
             Options => write!(f, "options"),
             Spec => write!(f, "spec"),
