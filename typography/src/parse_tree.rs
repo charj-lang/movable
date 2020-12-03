@@ -68,7 +68,9 @@ pub enum PatternKind {
 impl SpecDecl {}
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct VariablePattern {}
+pub struct VariablePattern {
+    pub name: Atom,
+}
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Options {

@@ -185,6 +185,8 @@ impl<'input> Lexer<'input> {
                         },
                     );
                 }
+                Some((i, '@')) => return Some(Ok((i, Token::At, i + 1))),
+                Some((i, '*')) => return Some(Ok((i, Token::Mul, i + 1))),
                 Some((i, '{')) => return Some(Ok((i, Token::OpenCurlyBrace, i + 1))),
                 Some((i, '}')) => return Some(Ok((i, Token::CloseCurlyBrace, i + 1))),
                 Some((idx0, '\'')) => return Some(self.lifetimeish(idx0)),

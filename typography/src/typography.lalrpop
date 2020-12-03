@@ -107,11 +107,15 @@ PropertyDecl: Box<PropertyDecl> = {
 PatternKind: PatternKind = {
     <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
     <c:"StringLiteral"> => PatternKind::StringLiteral(Atom::from(c)),
-//    <c:VariablePattern> => PatternKind::VariablePattern(),
+    <c:VariablePattern> => PatternKind::VariablePattern(),
 };
 
 VariablePattern: VariablePattern = {
-
+    <l:@L> "@" <name:Identify> "*"? <r:@R>  => {
+        VariablePattern {
+            name
+        }
+    }
 }
 
 Pattern: String = <lo:@L> <s:"Pattern"> =>? {
