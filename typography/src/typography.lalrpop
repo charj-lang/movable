@@ -15,12 +15,22 @@ GrammarUnit: GrammarUnit = {
     SpecDecl => GrammarUnit::SpecDecl(<>),
     OptionsDecl => GrammarUnit::OptionsDecl(<>),
     NamespaceDecl => GrammarUnit::NamespaceDecl(<>),
+    RuleDecl => GrammarUnit::RuleDecl(<>),
 };
 
 SpecDecl: Box<SpecDecl> = {
     <l:@L> "spec" "{" "}" <r:@R> => {
         Box::new(SpecDecl {
             location: Location::new(l, r)
+        })
+    }
+};
+
+RuleDecl: Box<RuleDecl> = {
+    <l:@L> "rule" <name:Identify> "{" "}" <r:@R> => {
+        Box::new(RuleDecl {
+            location: Location::new(l, r),
+            name
         })
     }
 };

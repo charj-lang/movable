@@ -10,6 +10,7 @@ pub enum GrammarUnit {
     SpecDecl(Box<SpecDecl>),
     OptionsDecl(Box<OptionsDecl>),
     NamespaceDecl(Box<NamespaceDecl>),
+    RuleDecl(Box<RuleDecl>),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -33,6 +34,12 @@ pub struct PropertyDecl {
     pub location: Location,
     pub name: Atom,
     pub pattern: PatternKind,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct RuleDecl {
+    pub location: Location,
+    pub name: Atom,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
