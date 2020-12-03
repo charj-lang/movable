@@ -9,6 +9,7 @@ pub struct TypoGrammar(pub Vec<GrammarUnit>);
 pub enum GrammarUnit {
     SpecDecl(Box<SpecDecl>),
     OptionsDecl(Box<OptionsDecl>),
+    NameSpaceDecl(Box<NameSpaceDecl>),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -35,14 +36,15 @@ pub struct PropertyDecl {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum PatternKind {
-    CharLiteral(Atom),
+pub struct NameSpaceDecl {
+    pub location: Location,
+    pub scope: Atom,
+    pub name: Atom,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct Identifier {
-    pub loc: Location,
-    pub name: String,
+pub enum PatternKind {
+    CharLiteral(Atom),
 }
 
 impl SpecDecl {}

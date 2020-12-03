@@ -2,6 +2,7 @@ use core::fmt;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Token<'input> {
+    Identify(&'input str),
     StringLiteral(&'input str),
     CharLiteral(&'input str),
     Lifetime(&'input str),
@@ -29,6 +30,7 @@ pub enum Token<'input> {
     Complement,
     More,
     Less,
+    Dollar,
 
     Options,
     Spec,
@@ -39,12 +41,14 @@ pub enum Token<'input> {
     Ast,
     Template,
     Impl,
+    Define,
 }
 
 impl<'input> fmt::Display for Token<'input> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         use Token::*;
         match self {
+            Identify(id) => write!(f, "{}", id),
             StringLiteral(id) => write!(f, "{}", id),
             CharLiteral(id) => write!(f, "{}", id),
             Lifetime(id) => write!(f, "{}", id),
@@ -72,6 +76,7 @@ impl<'input> fmt::Display for Token<'input> {
             Less => write!(f, "<"),
             ArrowAssign => write!(f, "->"),
             Arrow => write!(f, "=>"),
+            Dollar => write!(f, "$"),
 
             Options => write!(f, "options"),
             Spec => write!(f, "spec"),
@@ -82,6 +87,7 @@ impl<'input> fmt::Display for Token<'input> {
             Ast => write!(f, "ast"),
             Template => write!(f, "template"),
             Impl => write!(f, "impl"),
+            Define => write!(f, "define"),
         }
     }
 }

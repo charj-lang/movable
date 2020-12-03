@@ -26,6 +26,7 @@ static KEYWORDS: phf::Map<&'static str, Token> = phf_map! {
     "ast"  => Token::Ast,
     "template"  => Token::Template,
     "impl"  => Token::Impl,
+    "define"  => Token::Define,
 };
 
 fn is_identifier_start(c: char) -> bool {

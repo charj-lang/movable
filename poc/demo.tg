@@ -9,7 +9,7 @@ options {
 }
 
 // lexer
-typo$c.default {
+define default$tokenizer {
   identifier [a-zA-Z_];
   string "[a-zA-Z_]";
 
@@ -23,7 +23,7 @@ typo$c.default {
   variables -> @identifier (',' @identifier)?;
 }
 
-tokenizer extends typo$c.default {
+tokenizer extends default$tokenizer {
   contextual$node 'node'
   contextual$class 'class'
 

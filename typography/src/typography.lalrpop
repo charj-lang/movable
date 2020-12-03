@@ -13,7 +13,8 @@ pub Typography: TypoGrammar = {
 
 GrammarUnit: GrammarUnit = {
     SpecDecl => GrammarUnit::SpecDecl(<>),
-    OptionsDecl => GrammarUnit::OptionsDecl(<>)
+    OptionsDecl => GrammarUnit::OptionsDecl(<>),
+    NameSpaceDecl => GrammarUnit::NameSpaceDecl(<>),
 };
 
 SpecDecl: Box<SpecDecl> = {
@@ -32,6 +33,20 @@ OptionsDecl: Box<OptionsDecl> = {
         })
     }
 };
+
+NameSpaceDecl: Box<NameSpaceDecl> = {
+    <l:@L> "define" <scope:Identify> "$" <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
+        Box::new(NameSpaceDecl {
+            location: Location::new(l, r),
+            scope,
+            name
+        })
+    }
+};
+
+Identify: Atom = {
+    <i:"Identify"> => Atom::from(i),
+}
 
 PropertyDecl: Box<PropertyDecl> = {
     <l:@L> <name:StringLiteral> "->" <pattern:PatternKind> <r:@R> => {
@@ -55,6 +70,7 @@ extern {
     type Error = LexicalError;
 
     enum Token<'input> {
+        "Identify" => Token::Identify(<&'input str>),
         "StringLiteral" => Token::StringLiteral(<&'input str>),
         "CharLiteral" => Token::CharLiteral(<&'input str>),
 
@@ -79,9 +95,11 @@ extern {
         "]" => Token::CloseBracket,
         "." => Token::Member,
         "," => Token::Comma,
+        "$" => Token::Dollar,
 
         "spec" => Token::Spec,
         "options" => Token::Options,
+        "define" => Token::Define,
         "typo"  => Token::Typo,
         "default"  => Token::Default,
         "rule"  => Token::Tokenizer,
