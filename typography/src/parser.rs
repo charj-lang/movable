@@ -75,7 +75,19 @@ mod test {
     string: \"[a-zA-Z_]\";
 }");
 
-        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_support_local_scope() {
+        let parse_ast = parse_program("define default$tokenizer {
+  type {
+    int -> \"int\",
+    string -> \"string\"
+  }
+}");
+
         assert!(parse_ast.is_ok());
     }
 }

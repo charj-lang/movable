@@ -81,6 +81,17 @@ PropertyDecl: Box<PropertyDecl> = {
             pattern
         })
    },
+   <l:@L> <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R>  => {
+        let cloned_name = name.clone();
+        Box::new(PropertyDecl {
+            location: Location::new(l, r),
+            name,
+            pattern: PatternKind::LocalScope(LocalScopeDecl {
+                scope: cloned_name,
+                properties
+            })
+        })
+   }
 };
 
 PatternKind: PatternKind = {

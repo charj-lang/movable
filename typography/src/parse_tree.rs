@@ -44,10 +44,17 @@ pub struct NamespaceDecl {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct LocalScopeDecl {
+    pub scope: Atom,
+    pub properties: Vec<Box<PropertyDecl>>,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum PatternKind {
     CharLiteral(Atom),
     StringLiteral(Atom),
     Pattern(String),
+    LocalScope(LocalScopeDecl),
 }
 
 impl SpecDecl {}

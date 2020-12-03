@@ -15,8 +15,8 @@ define default$tokenizer {
 
   // default ?
   type {
-    int -> 'int',
-    string -> 'string'
+    int -> "int",
+    string -> "string"
   }
 
   parameters -> @type @identifier (',' @type @identifier)?;
