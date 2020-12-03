@@ -23,26 +23,24 @@ mod test {
     use crate::parser::parse_program;
 
     #[test]
-    #[rustfmt::skip]
     fn should_parse_empty_options() {
-        let parse_ast = parse_program("options {}");
-        assert!(parse_ast.is_ok());
+        assert!(parse_program("options {}").is_ok());
     }
 
-    //     #[test]
-    //     #[rustfmt::skip]
-    //     fn should_parse_string() {
-    //         let parse_ast = parse_program("options {
-    //     name -> \"C Syntax\"
-    // }");
-    //         println!("{:?}", parse_ast);
-    //         assert!(parse_ast.is_ok());
-    //     }
+    #[test]
+    #[rustfmt::skip]
+    fn should_parse_string() {
+        let parse_ast = parse_program("options{
+    name -> \"C Syntax\"
+}");
+        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
 
     #[test]
     #[rustfmt::skip]
     fn should_parse_options_property() {
-        let parse_ast = parse_program("options{ name -> 'C' ; }");
+        let parse_ast = parse_program("options{name -> 'C';}");
         let mut name_equal_name = false ;
         let grammar_units = parse_ast.unwrap().0;
         if let GrammarUnit::OptionsDecl(decl) = grammar_units.get(0).unwrap() {
@@ -52,17 +50,19 @@ mod test {
                 }
             }
         }
+
         assert!(name_equal_name);
     }
 
     #[test]
     #[rustfmt::skip]
     fn should_parse_multiple_options() {
-        let parse_ast = parse_program("options{ \
+        let parse_ast = parse_program("options{
     name -> 'C';
     name2 -> 'C';
-//    extensions -> \"c\";
+    extensions -> \".c\";
 }");
+
         println!("{:?}", parse_ast);
         assert!(parse_ast.is_ok());
     }
@@ -73,6 +73,7 @@ mod test {
         let parse_ast = parse_program("define default$tokenizer {
     identifier: [a-zA-Z_];
 }");
+
         println!("{:?}", parse_ast);
         assert!(parse_ast.is_ok());
     }

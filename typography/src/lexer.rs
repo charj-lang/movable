@@ -174,6 +174,17 @@ impl<'input> Lexer<'input> {
                 Some((idx0, ':')) => {
                     return Some(Ok((idx0, Token::Colon, idx0 + 1)));
                 }
+                Some((idx0, '"')) => {
+                    self.bump();
+                    return Some(
+                        match self.string_or_char_literal(idx0, '"', Token::StringLiteral) {
+                            Some(x) => Ok(x),
+                            None => {
+                                Err(LexicalError::UnrecognisedToken(idx0, idx0, "".to_string()))
+                            }
+                        },
+                    );
+                }
                 Some((i, '{')) => return Some(Ok((i, Token::OpenCurlyBrace, i + 1))),
                 Some((i, '}')) => return Some(Ok((i, Token::CloseCurlyBrace, i + 1))),
                 Some((idx0, '\'')) => return Some(self.lifetimeish(idx0)),
