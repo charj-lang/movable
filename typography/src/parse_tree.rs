@@ -40,11 +40,13 @@ pub struct NameSpaceDecl {
     pub location: Location,
     pub scope: Atom,
     pub name: Atom,
+    pub properties: Vec<Box<PropertyDecl>>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum PatternKind {
     CharLiteral(Atom),
+    Pattern(String),
 }
 
 impl SpecDecl {}

@@ -3,6 +3,7 @@ use core::fmt;
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Token<'input> {
     Identify(&'input str),
+    Pattern(&'input str),
     StringLiteral(&'input str),
     CharLiteral(&'input str),
     Lifetime(&'input str),
@@ -49,6 +50,7 @@ impl<'input> fmt::Display for Token<'input> {
         use Token::*;
         match self {
             Identify(id) => write!(f, "{}", id),
+            Pattern(id) => write!(f, "{}", id),
             StringLiteral(id) => write!(f, "{}", id),
             CharLiteral(id) => write!(f, "{}", id),
             Lifetime(id) => write!(f, "{}", id),

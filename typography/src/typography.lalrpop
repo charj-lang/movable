@@ -35,11 +35,20 @@ OptionsDecl: Box<OptionsDecl> = {
 };
 
 NameSpaceDecl: Box<NameSpaceDecl> = {
+    <l:@L> "define" "default" "$" <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
+        Box::new(NameSpaceDecl {
+            location: Location::new(l, r),
+            scope: Atom::from("default"),
+            name,
+            properties
+        })
+    },
     <l:@L> "define" <scope:Identify> "$" <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
         Box::new(NameSpaceDecl {
             location: Location::new(l, r),
             scope,
-            name
+            name,
+            properties
         })
     }
 };
@@ -49,16 +58,29 @@ Identify: Atom = {
 }
 
 PropertyDecl: Box<PropertyDecl> = {
-    <l:@L> <name:StringLiteral> "->" <pattern:PatternKind> <r:@R> => {
+    <l:@L> <name:Identify> "->" <pattern:PatternKind> ";"? <r:@R>  => {
         Box::new(PropertyDecl {
-              location: Location::new(l, r),
-              name,
-              pattern })
-   }
+            location: Location::new(l, r),
+            name,
+            pattern
+        })
+   },
+    <l:@L> <name:Identify> ":" <string:Pattern> ";"? <r:@R>  => {
+        let pattern = PatternKind::Pattern(string);
+        Box::new(PropertyDecl {
+            location: Location::new(l, r),
+            name,
+            pattern
+        })
+   },
 };
 
 PatternKind: PatternKind = {
     <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
+};
+
+Pattern: String = <lo:@L> <s:"Pattern"> =>? {
+    Ok(s.to_string())
 };
 
 StringLiteral: Atom = <lo:@L> <s:"StringLiteral"> =>? {
@@ -73,6 +95,7 @@ extern {
         "Identify" => Token::Identify(<&'input str>),
         "StringLiteral" => Token::StringLiteral(<&'input str>),
         "CharLiteral" => Token::CharLiteral(<&'input str>),
+        "Pattern" => Token::Pattern(<&'input str>),
 
         ";" => Token::Semicolon,
         "{" => Token::OpenCurlyBrace,

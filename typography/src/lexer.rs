@@ -165,11 +165,15 @@ impl<'input> Lexer<'input> {
                     return if let Some(w) = KEYWORDS.get(id) {
                         Some(Ok((start, *w, end)))
                     } else {
-                        Some(Ok((start, Token::StringLiteral(id), end)))
+                        Some(Ok((start, Token::Identify(id), end)))
                     };
                 }
                 Some((_, ch)) if ch.is_whitespace() => (),
                 Some((i, ';')) => return Some(Ok((i, Token::Semicolon, i + 1))),
+                Some((i, '$')) => return Some(Ok((i, Token::Dollar, i + 1))),
+                Some((idx0, ':')) => {
+                    return Some(Ok((idx0, Token::Colon, idx0 + 1)));
+                }
                 Some((i, '{')) => return Some(Ok((i, Token::OpenCurlyBrace, i + 1))),
                 Some((i, '}')) => return Some(Ok((i, Token::CloseCurlyBrace, i + 1))),
                 Some((idx0, '\'')) => return Some(self.lifetimeish(idx0)),
@@ -191,6 +195,22 @@ impl<'input> Lexer<'input> {
                 }
                 Some((start, _)) => {
                     let mut end;
+
+                    let until_nl = self.take_until(|c| c == '\n');
+                    match until_nl {
+                        None => {}
+                        Some(end) => {
+                            let string = self.text[start..end].to_owned();
+                            let has_end = string.contains(';');
+                            if has_end {
+                                return Some(Ok((
+                                    start,
+                                    Token::Pattern(&self.text[start..end - 1]),
+                                    end - start,
+                                )));
+                            }
+                        }
+                    }
 
                     loop {
                         if let Some((i, ch)) = self.bump() {
