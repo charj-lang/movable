@@ -9,7 +9,7 @@ pub struct TypoGrammar(pub Vec<GrammarUnit>);
 pub enum GrammarUnit {
     SpecDecl(Box<SpecDecl>),
     OptionsDecl(Box<OptionsDecl>),
-    NameSpaceDecl(Box<NameSpaceDecl>),
+    NamespaceDecl(Box<NamespaceDecl>),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -36,7 +36,7 @@ pub struct PropertyDecl {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct NameSpaceDecl {
+pub struct NamespaceDecl {
     pub location: Location,
     pub scope: Atom,
     pub name: Atom,

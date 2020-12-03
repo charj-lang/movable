@@ -14,7 +14,7 @@ pub Typography: TypoGrammar = {
 GrammarUnit: GrammarUnit = {
     SpecDecl => GrammarUnit::SpecDecl(<>),
     OptionsDecl => GrammarUnit::OptionsDecl(<>),
-    NameSpaceDecl => GrammarUnit::NameSpaceDecl(<>),
+    NamespaceDecl => GrammarUnit::NamespaceDecl(<>),
 };
 
 SpecDecl: Box<SpecDecl> = {
@@ -34,9 +34,9 @@ OptionsDecl: Box<OptionsDecl> = {
     }
 };
 
-NameSpaceDecl: Box<NameSpaceDecl> = {
+NamespaceDecl: Box<NamespaceDecl> = {
     <l:@L> "define" "default" "$" <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
-        Box::new(NameSpaceDecl {
+        Box::new(NamespaceDecl {
             location: Location::new(l, r),
             scope: Atom::from("default"),
             name,
@@ -44,7 +44,7 @@ NameSpaceDecl: Box<NameSpaceDecl> = {
         })
     },
     <l:@L> "define" <scope:Identify> "$" <name:Identify> "{" <properties:(<PropertyDecl>)*> "}" <r:@R> => {
-        Box::new(NameSpaceDecl {
+        Box::new(NamespaceDecl {
             location: Location::new(l, r),
             scope,
             name,
