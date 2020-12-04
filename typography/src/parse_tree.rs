@@ -66,16 +66,37 @@ pub enum PatternKind {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum MatchTime {
-    OneOrMore(), // +
-    More(),      // *
-    Optional(),  // ?
+pub enum EbnfSuffix {
+    PLUS(),     // +
+    STAR(),     // *
+    QUESTION(), // ?
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum LexerAtom {
+    Terminal(),
+    CharacterRange(),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum SetElement {
+    CharacterRange(),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum LexerBlock {
+    PlaceHolder(),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum Block {
+    PlaceHolder(),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct VariablePattern {
     pub name: Atom,
-    pub match_times: Option<MatchTime>,
+    pub ebnf_suffix: Option<EbnfSuffix>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]

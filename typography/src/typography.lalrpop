@@ -111,18 +111,24 @@ PatternKind: PatternKind = {
 };
 
 VariablePattern: VariablePattern = {
-    <l:@L> "@" <name:Identify> <match_times: MatchTime?> <r:@R>  => {
+    <l:@L> "@" <name:Identify> <ebnf_suffix: EbnfSuffix?> <r:@R>  => {
         VariablePattern {
             name,
-            match_times
+            ebnf_suffix
         }
-    }
+    },
 }
 
-MatchTime: MatchTime = {
-    <c:"*"> => MatchTime::More(),
-    <c:"?"> => MatchTime::Optional(),
-    <c:"+"> => MatchTime::OneOrMore(),
+EbnfSuffix: EbnfSuffix = {
+    <c:"*"> => EbnfSuffix::STAR(),
+    <c:"?"> => EbnfSuffix::QUESTION(),
+    <c:"+"> => EbnfSuffix::PLUS(),
+}
+
+LexerBlock: LexerBlock = {
+    <l:@L> "(" ")" <r:@R>  => {
+        LexerBlock::PlaceHolder()
+    }
 }
 
 Pattern: String = <lo:@L> <s:"Pattern"> =>? {
@@ -163,6 +169,7 @@ extern {
         "[" => Token::OpenBracket,
         "]" => Token::CloseBracket,
         "." => Token::Member,
+        ".." => Token::Range,
         "," => Token::Comma,
         "$" => Token::Dollar,
         "@" => Token::At,

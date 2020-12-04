@@ -197,6 +197,15 @@ impl<'input> Lexer<'input> {
                     }
                     _ => return Some(Ok((i, Token::Divide, i + 1))),
                 },
+                Some((i, '.')) => {
+                    return match self.bump() {
+                        Some((_, '.')) => {
+                            self.bump();
+                            Some(Ok((i, Token::Range, i + 2)))
+                        }
+                        _ => Some(Ok((i, Token::Member, i + 1))),
+                    }
+                }
                 Some((i, '-')) => {
                     return match self.chars.peek() {
                         Some((_, '>')) => {
