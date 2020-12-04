@@ -1,8 +1,11 @@
 # Movable DSL
 
-from Movable Type（in Chinese: 活字印刷术）
+Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](github.com/phodal/scie/).
 
-Movable is a intermedia DSL for description tokens which convert by [Scie](github.com/phodal/scie/).
+ - structure organization
+ - inheritance
+ - structure generate
+ - template transpile
 
 ## Syntax
 
@@ -22,7 +25,7 @@ tokenizer extends default$tokenizer {
    ...
 }
 
-// definerule
+// define rule
 rule <ruleName> {
     ...
 }
@@ -42,6 +45,29 @@ typo {
      impl: 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
   }
 }
+```
+
+## HIR Template Engine
+
+```
+function.delimiters "{" "}"
+parameters.delimiters "(" ")"
+line.delimiters ";"
+
+indent "    "
+indent.forced
+
+function "main"
+  returns int
+  parameters none
+  expr `$F("hello, world!");` "print"
+  block {
+     stmt "if"
+     cond "a > b"
+     expr
+  }
+
+  expr `return $N`
 ```
 
 ## Contributors
