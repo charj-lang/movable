@@ -47,7 +47,7 @@ typo {
 }
 ```
 
-## HIR Template Engine
+## HIR DSL for Code Generation (Design)
 
 ```
 function.delimiters "{" "}"
@@ -57,17 +57,18 @@ line.delimiters ";"
 indent "    "
 indent.forced
 
-function "main"
+function "main" {
   returns int
   parameters none
-  expr `$F("hello, world!");` "print"
+  expr `{:?}("hello, world!");`, "print"
   block {
      stmt "if"
      cond "a > b"
-     expr
+     expr `return {:?}`, 0
   }
 
-  expr `return $N`
+  expr `return {:?}`, 0
+}
 ```
 
 ## Contributors
