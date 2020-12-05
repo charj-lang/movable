@@ -108,7 +108,16 @@ mod test {
   variables -> @identifier*;
 }");
 
-        println!("{:?}", parse_ast);
+        assert!(parse_ast.is_ok());
+    }
+
+    #[test]
+    #[rustfmt::skip]
+    fn should_support_use_multiple_variables() {
+        let parse_ast = parse_program("define default$tokenizer {
+  // variables: @identifier* @types;
+}");
+
         assert!(parse_ast.is_ok());
     }
 

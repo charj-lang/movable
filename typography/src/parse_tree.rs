@@ -61,6 +61,7 @@ pub enum PatternKind {
     CharLiteral(Atom),
     StringLiteral(Atom),
     Pattern(String),
+    RuleBlock(RuleBlock),
     VariablePattern(VariablePattern),
     LocalScope(LocalScopeDecl),
 }
@@ -91,6 +92,16 @@ pub enum LexerBlock {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum Block {
     PlaceHolder(),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct RuleBlock {}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum RuleElement {
+    LabeledElement,
+    Atom,
+    Ebnf,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
