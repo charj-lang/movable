@@ -106,8 +106,9 @@ PropertyDecl: Box<PropertyDecl> = {
 
 PatternKind: PatternKind = {
     <c:"CharLiteral"> => PatternKind::CharLiteral(Atom::from(c)),
-    <c:"StringLiteral"> => PatternKind::StringLiteral(Atom::from(c)),
+    <s:"StringLiteral"> => PatternKind::StringLiteral(Atom::from(s)),
     <c:VariablePattern> => PatternKind::VariablePattern(c),
+    <e:EbnfBlock> => PatternKind::EbnfBlock(e),
 };
 
 VariablePattern: VariablePattern = {
@@ -135,13 +136,20 @@ Alternative: Alternative = {
 }
 
 EbnfElement: EbnfElement = {
+    <l:LabelElement> => EbnfElement::LabeledElement(l),
     <c:"CharLiteral"> => EbnfElement::Atom(Atom::from(c)),
 }
 
+LabelElement: LabeledElement = {
+    <l:@L> "@" <name:Identify><ebnf_suffix: EbnfSuffix?> <r:@R>  => {
+        LabeledElement { }
+    }
+}
+
 EbnfSuffix: EbnfSuffix = {
-    <c:"*"> => EbnfSuffix::STAR(),
-    <c:"?"> => EbnfSuffix::QUESTION(),
-    <c:"+"> => EbnfSuffix::PLUS(),
+    <c:"*"> => EbnfSuffix::STAR,
+    <c:"?"> => EbnfSuffix::QUESTION,
+    <c:"+"> => EbnfSuffix::PLUS,
 }
 
 LexerBlock: LexerBlock = {

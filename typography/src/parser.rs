@@ -113,9 +113,9 @@ mod test {
 
     #[test]
     #[rustfmt::skip]
-    fn should_support_use_multiple_variables() {
+    fn should_support_basic_bnf_suffix() {
         let parse_ast = parse_program("define default$tokenizer {
-  // variables: @identifier* @types;
+  variables: (@identifier)*;
 }");
 
         assert!(parse_ast.is_ok());
