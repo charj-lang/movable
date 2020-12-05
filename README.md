@@ -1,5 +1,7 @@
 # Movable DSL
 
+![CI](https://github.com/charj-lang/movable/workflows/CI/badge.svg)
+
 Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](github.com/phodal/scie/).
 
  - structure organization
