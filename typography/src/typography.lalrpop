@@ -113,10 +113,29 @@ PatternKind: PatternKind = {
 VariablePattern: VariablePattern = {
     <l:@L> "@" <name:Identify> <ebnf_suffix: EbnfSuffix?> <r:@R>  => {
         VariablePattern {
+            location: Location::new(l, r),
             name,
             ebnf_suffix
         }
     },
+}
+
+EbnfBlock: EbnfBlock = {
+    // todo: thinking in Element -> Alternative
+    <l:@L> "(" <list:(<EbnfElement>)*> ")" <r:@R> => {
+        EbnfBlock {
+            location: Location::new(l, r),
+            elements: list
+        }
+    }
+}
+
+Alternative: Alternative = {
+
+}
+
+EbnfElement: EbnfElement = {
+    <c:"CharLiteral"> => EbnfElement::Atom(Atom::from(c)),
 }
 
 EbnfSuffix: EbnfSuffix = {

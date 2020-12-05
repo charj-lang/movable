@@ -57,6 +57,30 @@ pub struct LocalScopeDecl {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct RuleBlock {}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum RuleElement {
+    LabeledElement,
+    Atom,
+    Ebnf(EbnfBlock),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct EbnfBlock {
+    pub location: Location,
+    pub elements: Vec<EbnfElement>,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Alternative {}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum EbnfElement {
+    Atom(Atom),
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum PatternKind {
     CharLiteral(Atom),
     StringLiteral(Atom),
@@ -95,17 +119,8 @@ pub enum Block {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct RuleBlock {}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum RuleElement {
-    LabeledElement,
-    Atom,
-    Ebnf,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct VariablePattern {
+    pub location: Location,
     pub name: Atom,
     pub ebnf_suffix: Option<EbnfSuffix>,
 }
