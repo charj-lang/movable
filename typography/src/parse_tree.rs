@@ -98,12 +98,6 @@ pub enum EbnfSuffix {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum LexerAtom {
-    Terminal(),
-    CharacterRange(),
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum SetElement {
     CharacterRange(),
 }
@@ -114,8 +108,9 @@ pub enum LexerBlock {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub enum Block {
-    PlaceHolder(),
+pub enum LexerAtom {
+    Terminal(),
+    CharacterRange(),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -124,12 +119,3 @@ pub struct VariablePattern {
     pub name: Atom,
     pub ebnf_suffix: Option<EbnfSuffix>,
 }
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct Options {
-    pub name: Option<String>,
-    pub extensions: Vec<String>,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct Tokenizer {}
