@@ -83,8 +83,8 @@ mod test {
     fn should_support_local_scope() {
         let parse_ast = parse_program("define default$tokenizer {
   type {
-    int -> \"int\",
-    string -> \"string\"
+    int -> \"int\";
+    string -> \"string\";
   }
 }");
 

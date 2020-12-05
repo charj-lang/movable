@@ -15,8 +15,8 @@ define default$tokenizer {
 
   // default ?
   type {
-    int -> "int",
-    string -> "string"
+    int -> "int";
+    string -> "string";
   }
 
   parameters -> @type @identifier (',' @type @identifier)?;
@@ -24,15 +24,15 @@ define default$tokenizer {
 }
 
 tokenizer extends default$tokenizer {
-  contextual$node 'node'
-  contextual$class 'class'
+  contextual$node 'node';
+  contextual$class 'class';
 
   // delimiters
-  raw_string -> '"'
-  end_line -> ';'
-  dot -> '.'
-  gt -> '>'
-  lt -> '<'
+  raw_string -> '"';
+  end_line -> ';';
+  dot -> '.';
+  gt -> '>';
+  lt -> '<';
 }
 
 rule import {

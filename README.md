@@ -12,7 +12,7 @@ Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL
 ```
 // options for movable config
 options {
-  name  -> "c"
+  name  -> "c";
 }
 
 // default tokenizer for extends
@@ -34,7 +34,7 @@ rule <ruleName> {
 // todo: for future
 ast {
   node parameters {
-    parameters parameter*
+    parameters parameter*;
   }
 }
 
