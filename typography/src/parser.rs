@@ -114,11 +114,21 @@ mod test {
     #[test]
     #[rustfmt::skip]
     fn should_support_basic_bnf_suffix() {
-        let parse_ast = parse_program("define default$tokenizer {
+        let normal = parse_program("define default$tokenizer {
   variables: (@identifier)*;
 }");
 
-        assert!(parse_ast.is_ok());
+        assert!(normal.is_ok());
+
+        let char = parse_program("define default$tokenizer {
+  variables: (\",\" @identifier)?;
+}");
+        assert!(char.is_ok());
+
+        let char_single_quote = parse_program("define default$tokenizer {
+  variables: (',' @identifier)*;
+}");
+        assert!(char_single_quote.is_ok());
     }
 
     #[test]
