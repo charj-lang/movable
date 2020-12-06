@@ -6,7 +6,7 @@ use crate::parse_tree::*;
 
 grammar<'input>(input: &'input str);
 
-pub Typography: SourceUnit = {
+pub Movable: SourceUnit = {
     SourceUnitPart+ => SourceUnit(<>)
 };
 

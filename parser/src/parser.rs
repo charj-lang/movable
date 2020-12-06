@@ -1,12 +1,12 @@
 use crate::error::Diagnostic;
 use crate::lexer;
+use crate::movable;
 use crate::parse_tree::SourceUnit;
-use crate::typography;
 
 macro_rules! do_lalr_parsing {
     ($input: expr) => {{
         let lex = lexer::Lexer::new($input);
-        match typography::TypographyParser::new().parse($input, lex) {
+        match movable::MovableParser::new().parse($input, lex) {
             Err(err) => Err(Diagnostic::handle_error(err)),
             Ok(s) => Ok(s),
         }

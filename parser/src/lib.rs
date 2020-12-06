@@ -4,7 +4,7 @@ extern crate lalrpop_util;
 lalrpop_mod!(
     #[allow(clippy::all)]
     #[allow(unused)]
-    pub typography
+    pub movable
 );
 
 pub mod error;
