@@ -5,6 +5,7 @@ use std::path::Path;
 pub use token_element::TokenElement;
 
 pub mod code_file;
+pub mod retoken;
 pub mod token_element;
 
 pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
@@ -26,6 +27,31 @@ mod tests {
         path.push("_fixtures/c/hello.c.json");
 
         let vec = read_scie_data(&*path);
-        assert_eq!(1, vec.len());
+        for token in &vec[0].elements {
+            let last_token = token.scopes[token.scopes.len() - 1].as_str();
+            let mut next_to_last = "";
+            if token.scopes.len() > 2 {
+                next_to_last = token.scopes[token.scopes.len() - 2].as_str();
+            }
+
+            match last_token {
+                "string.quoted.other.lt-gt.include.c" => {
+                    println!("{:?}", token.value);
+                }
+                "entity.name.function.c" => match next_to_last {
+                    "meta.function.definition.parameters.c" => {
+                        println!("function: {:?}", token.value);
+                    }
+                    "meta.function-call.c" => {
+                        println!("callee: {:?}", token.value);
+                    }
+                    _ => {}
+                },
+                "string.quoted.double.c" => {
+                    println!("string: {:?}", token.value);
+                }
+                _ => {}
+            }
+        }
     }
 }
