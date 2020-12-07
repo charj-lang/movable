@@ -52,9 +52,11 @@ typo {
 ## HIR DSL for Code Generation (Design)
 
 ```
-function.delimiters "{" "}"
-parameters.delimiters "(" ")"
-line.delimiters ";"
+function.block.delimiters "{" "}"
+parameters.block.delimiters "(" ")"
+parameters. ","
+parameters.type.sp ";"
+line.block.delimiters ";"
 
 indent "    "
 indent.forced
