@@ -9,8 +9,6 @@ Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL
 - structure generate
 - template transpile
 
-
-
 ## Typography
 
 Typography is a DSL-base parser for build AST. features:
