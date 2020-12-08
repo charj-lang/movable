@@ -10,7 +10,7 @@ pub struct DelimiterSymbol {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum Ident {
     Space(i8),
-    Tab,
+    Tab(String),
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -27,4 +27,28 @@ pub struct ParameterDelimiter {
     pub spacer: String,
     /// e.g. : `String hello` in Java, `path: PathBuf` in Rust
     pub type_spacer: String,
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::domain::delimiter::DelimiterSymbol;
+
+    #[test]
+    fn should_convert_obj() {
+        let str = "
+structs:
+  start: '{'
+  end: '}'
+parameter:
+  start: '{'
+  end: '}'
+  spacer: ''
+  type_spacer: ''
+ident: 
+  Space: 2
+";
+
+        let pair: DelimiterSymbol = serde_yaml::from_str(&str).unwrap();
+        println!("{:?}", pair);
+    }
 }

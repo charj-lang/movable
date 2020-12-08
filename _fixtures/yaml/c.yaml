@@ -1,0 +1,9 @@
+structs:
+  start: '{'
+  end: '}'
+parameter:
+  start: '{'
+  end: '}'
+  spacer: ''
+  type_spacer: ''
+ident: 2
