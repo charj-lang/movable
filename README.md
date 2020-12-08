@@ -4,10 +4,10 @@
 
 Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](github.com/phodal/scie/).
 
- - structure organization
- - inheritance
- - structure generate
- - template transpile
+- structure organization
+- inheritance
+- structure generate
+- template transpile
 
 
 
@@ -19,7 +19,7 @@ Typography is a DSL-base parser for build AST. features:
 - data struct binding
 - template match
 
-### Syntax 
+### Syntax
 
 ```
 // options for movable config
@@ -65,16 +65,27 @@ Movable is a DSL for save convert DSL
 
 ### Syntax
 
+symbol match dsl
+
 ```
-function.block.delimiters "{" "}"
-parameters.block.delimiters "(" ")"
-parameters. ","
-parameters.type.sp ";"
-line.block.delimiters ";"
+delimiters {
+    struct "{" "}"
+    parameter ":"
+    parameters "(" parameter ","  ")"
+    statement_terminator ";"
+    ident "\t"
+//  ident 2
+}
+type {
+   int   int
+   uint
+   float 
+}
+```
 
-indent "    "
-indent.forced
+struct/class/method DSL:
 
+```
 .method <return-type> <method-name>()
   // sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;
   // const-string	v1, "Hello World!"
