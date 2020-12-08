@@ -19,3 +19,5 @@ pub struct TypeAlias {
     pub bool: String,
     pub byte: String,
 }
+
+impl TypeAlias {}

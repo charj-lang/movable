@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 use crate::domain::delimiter::DelimiterSymbol;
+use crate::domain::lang_default::LangDefault;
+use crate::domain::type_alias::TypeAlias;
 
 pub mod delimiter;
 pub mod lang_builtin;
@@ -10,7 +12,13 @@ pub mod type_alias;
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct MovableDefine {
     pub language: String,
+    /// for symbol in function and parameters
     pub delimiter: DelimiterSymbol,
+    /// for some language default config
+    pub lang_default: LangDefault,
+    /// for type systems
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub type_alias: Option<TypeAlias>,
 }
 
 #[cfg(test)]
@@ -32,6 +40,9 @@ delimiter:
     type_spacer: ''
   ident: 
     Space: 2
+lang_default:
+  main_func: default$main
+  is_script: false
 ";
 
         let pair: MovableDefine = serde_yaml::from_str(&str).unwrap();
