@@ -1,26 +1,40 @@
+use serde::{Deserialize, Serialize};
+
+use crate::domain::delimiter::DelimiterSymbol;
+
 pub mod delimiter;
 pub mod lang_builtin;
 pub mod lang_default;
 pub mod type_alias;
 
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct MovableDefine {
+    pub language: String,
+    pub delimiter: DelimiterSymbol,
+}
+
 #[cfg(test)]
 mod tests {
-    use serde::{Deserialize, Serialize};
-
-    #[derive(Debug, PartialEq, Serialize, Deserialize)]
-    struct Point {
-        x: f64,
-        y: f64,
-    }
+    use crate::domain::MovableDefine;
 
     #[test]
-    fn should_convert_yaml() {
-        let point = Point { x: 1.0, y: 2.0 };
+    fn should_convert_obj() {
+        let str = "
+language: charj
+delimiter:
+  structs:
+    start: '{'
+    end: '}'
+  parameter:
+    start: '{'
+    end: '}'
+    spacer: ''
+    type_spacer: ''
+  ident: 
+    Space: 2
+";
 
-        let s = serde_yaml::to_string(&point).unwrap();
-        assert_eq!(s, "---\nx: 1.0\ny: 2.0");
-
-        let deserialized_point: Point = serde_yaml::from_str(&s).unwrap();
-        assert_eq!(point, deserialized_point);
+        let pair: MovableDefine = serde_yaml::from_str(&str).unwrap();
+        println!("{:?}", pair);
     }
 }

@@ -66,9 +66,9 @@ Movable is a DSL for save convert DSL
 symbol match dsl
 
 1. read target language DSL file
-   - MVP version, use yaml
-   - formal version, use DSL
-2. read code json
+   - MVP version, with **yaml**
+   - production version, with **DSL**
+2. read code tokenizer json
 3. convert to struct DSL as MIR???
 4. convert to language
 
