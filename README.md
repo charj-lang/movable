@@ -9,7 +9,17 @@ Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL
  - structure generate
  - template transpile
 
-## Syntax
+
+
+## Typography
+
+Typography is a DSL-base parser for build AST. features:
+
+- extends
+- data struct binding
+- template match
+
+### Syntax 
 
 ```
 // options for movable config
@@ -49,7 +59,11 @@ typo {
 }
 ```
 
-## HIR DSL for Code Generation (Design)
+## Movable
+
+Movable is a DSL for save convert DSL
+
+### Syntax
 
 ```
 function.block.delimiters "{" "}"
@@ -61,9 +75,10 @@ line.block.delimiters ";"
 indent "    "
 indent.forced
 
-function "main" {
-  returns int
-  parameters none
+.method <return-type> <method-name>()
+  // sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;
+  // const-string	v1, "Hello World!"
+  // invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V 
   expr `{:?}("hello, world!");`, "print"
   block {
      stmt "if"
@@ -72,7 +87,7 @@ function "main" {
   }
 
   expr `return {:?}`, 0
-}
+.end method
 ```
 
 ## Contributors
