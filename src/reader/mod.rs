@@ -5,7 +5,6 @@ use std::path::Path;
 pub use token_element::TokenElement;
 
 pub mod code_file;
-pub mod delimiter;
 pub mod retoken;
 pub mod token_element;
 
