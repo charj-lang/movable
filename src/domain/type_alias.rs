@@ -12,9 +12,10 @@ pub struct TypeAlias {
     pub uint16: String,
     pub uint32: String,
 
-    pub float: String,
     pub float32: String,
     pub float64: String,
+
     pub string: String,
     pub bool: String,
+    pub byte: String,
 }
