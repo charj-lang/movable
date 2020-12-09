@@ -64,7 +64,7 @@ ident:
   Space: 2
 ";
 
-        let pair: DelimiterSymbol = serde_yaml::from_str(&str).unwrap();
-        println!("{:?}", pair);
+        let symbol: DelimiterSymbol = serde_yaml::from_str(&str).unwrap();
+        assert_eq!(";", symbol.statement);
     }
 }

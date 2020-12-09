@@ -46,7 +46,7 @@ lang_default:
   is_script: false
 ";
 
-        let pair: MovableDefine = serde_yaml::from_str(&str).unwrap();
-        println!("{:?}", pair);
+        let define: MovableDefine = serde_yaml::from_str(&str).unwrap();
+        assert_eq!(false, define.lang_default.is_script);
     }
 }
