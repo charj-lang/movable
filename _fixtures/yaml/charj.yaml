@@ -6,4 +6,8 @@ parameter:
   end: '}'
   spacer: ''
   type_spacer: ''
-ident: 2
+ident:
+    Space: 2
+lang_default:
+  main_func: default$main
+  is_script: false

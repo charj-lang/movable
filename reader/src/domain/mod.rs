@@ -38,6 +38,7 @@ delimiter:
     end: '}'
     spacer: ''
     type_spacer: ''
+  statement: ;
   ident: 
     Space: 2
 lang_default:
