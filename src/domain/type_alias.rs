@@ -20,4 +20,24 @@ pub struct TypeAlias {
     pub byte: String,
 }
 
+impl TypeAlias {
+    pub fn new() -> Self {
+        TypeAlias {
+            int: "int".to_string(),
+            int8: "int8".to_string(),
+            int16: "int16".to_string(),
+            int32: "int32".to_string(),
+            uint: "uint".to_string(),
+            uint8: "uint8".to_string(),
+            uint16: "uint16".to_string(),
+            uint32: "uint32".to_string(),
+            float32: "float32".to_string(),
+            float64: "float64".to_string(),
+            string: "string".to_string(),
+            bool: "bool".to_string(),
+            byte: "byte".to_string(),
+        }
+    }
+}
+
 impl TypeAlias {}
