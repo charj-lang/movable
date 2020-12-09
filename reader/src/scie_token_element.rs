@@ -40,7 +40,7 @@ pub struct ElementScope {
 
 #[cfg(test)]
 mod tests {
-    use crate::reader::TokenElement;
+    use crate::TokenElement;
 
     #[test]
     fn should_run() {

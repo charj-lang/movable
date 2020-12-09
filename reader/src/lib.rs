@@ -1,12 +1,16 @@
-pub use code_file::CodeFile;
+#[macro_use]
+extern crate strum_macros;
+
+pub use scie_code_file::CodeFile;
+pub use scie_token_element::TokenElement;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
-pub use token_element::TokenElement;
 
-pub mod code_file;
+pub mod domain;
 pub mod retoken;
-pub mod token_element;
+pub mod scie_code_file;
+pub mod scie_token_element;
 
 pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
     let mut file = File::open(path).unwrap();
@@ -18,13 +22,13 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
 
 #[cfg(test)]
 mod tests {
-    use crate::reader::read_scie_data;
+    use crate::read_scie_data;
     use std::path::PathBuf;
 
     #[test]
     fn should_build_first_file() {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-        path.push("_fixtures/c/hello.c.json");
+        path.push("../_fixtures/c/hello.c.json");
 
         let vec = read_scie_data(&*path);
         for token in &vec[0].elements {

@@ -1,4 +1,4 @@
-use crate::reader::TokenElement;
+use crate::TokenElement;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
