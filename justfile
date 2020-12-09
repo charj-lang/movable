@@ -1,11 +1,11 @@
 tests:
 	cargo test --all
 
-tests-ci:
-	cargo test
-
 build:
     cargo build
+
+doc:
+    cargo doc --all
 
 @bench:
 	cargo bench
