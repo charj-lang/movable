@@ -66,9 +66,9 @@ symbol match dsl
 
 ```
 type {
-   int   int
-   uint
-   float 
+   int "int"
+   uint "unit"
+   float "float"
 }
 ```
 

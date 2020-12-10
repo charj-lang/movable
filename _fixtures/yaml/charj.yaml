@@ -11,3 +11,5 @@ ident:
 lang_default:
   main_func: default$main
   is_script: false
+types:
+  int: int
