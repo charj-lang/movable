@@ -11,6 +11,7 @@ pub mod domain;
 pub mod retoken;
 pub mod scie_code_file;
 pub mod scie_token_element;
+pub mod simple_hir;
 
 pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
     let mut file = File::open(path).unwrap();
@@ -30,6 +31,7 @@ mod tests {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("../_fixtures/c/hello.c.json");
 
+        let output: Vec<String> = vec![];
         let vec = read_scie_data(&*path);
         for token in &vec[0].elements {
             let last_token = token.scopes[token.scopes.len() - 1].as_str();
