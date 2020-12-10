@@ -11,7 +11,7 @@ Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL
 
 ## Typography
 
-Typography is a DSL-base parser for build AST. features:
+Typography is a DSL-base parser for build common AST. features:
 
 - extends
 - data struct binding
@@ -45,14 +45,6 @@ rule <ruleName> {
 ast {
   node parameters {
     parameters parameter*;
-  }
-}
-
-// template mapping
-typo {
-  import {
-     template: '#' 'include'
-     impl: 'punctuation.definition.directive.c' 'meta.preprocessor.include.c'
   }
 }
 ```
