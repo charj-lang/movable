@@ -24,6 +24,7 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
 #[cfg(test)]
 mod tests {
     use crate::read_scie_data;
+    use crate::simple_hir::{Sir, SirProgram};
     use std::path::PathBuf;
 
     #[test]
@@ -31,7 +32,7 @@ mod tests {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("../_fixtures/c/hello.c.json");
 
-        let output: Vec<String> = vec![];
+        let mut sir_program = SirProgram::default();
         let vec = read_scie_data(&*path);
         for token in &vec[0].elements {
             let last_token = token.scopes[token.scopes.len() - 1].as_str();
@@ -42,7 +43,7 @@ mod tests {
 
             match last_token {
                 "string.quoted.other.lt-gt.include.c" => {
-                    println!("{:?}", token.value);
+                    sir_program.add_sir(Sir::Import(token.value.to_string()));
                 }
                 "entity.name.function.c" => match next_to_last {
                     "meta.function.definition.parameters.c" => {
@@ -59,5 +60,7 @@ mod tests {
                 _ => {}
             }
         }
+
+        println!("{:?}", sir_program);
     }
 }

@@ -1,4 +1,21 @@
 #[derive(Debug, PartialEq, Clone)]
+pub struct SirProgram {
+    pub sirs: Vec<Sir>,
+}
+
+impl Default for SirProgram {
+    fn default() -> Self {
+        SirProgram { sirs: vec![] }
+    }
+}
+
+impl SirProgram {
+    pub fn add_sir(&mut self, sir: Sir) {
+        self.sirs.push(sir);
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub enum Sir {
     Import(String),
     Function(SirFunction),
