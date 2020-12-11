@@ -47,15 +47,18 @@ mod tests {
                 }
                 "entity.name.function.c" => match next_to_last {
                     "meta.function.definition.parameters.c" => {
-                        println!("function: {:?}", token.value);
+                        sir_program.create_function(token.value.to_string());
                     }
                     "meta.function-call.c" => {
-                        println!("callee: {:?}", token.value);
+                        sir_program.create_stmt(token.value.clone());
                     }
                     _ => {}
                 },
                 "string.quoted.double.c" => {
                     println!("string: {:?}", token.value);
+                }
+                "punctuation.section.block.end.bracket.curly.c" => {
+                    sir_program.done_function();
                 }
                 _ => {}
             }
