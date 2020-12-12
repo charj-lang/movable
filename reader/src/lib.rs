@@ -1,11 +1,12 @@
 #[macro_use]
 extern crate strum_macros;
 
+use crate::simple_hir::{Sir, SirProgram};
 pub use scie_code_file::CodeFile;
 pub use scie_token_element::TokenElement;
 use std::fs::File;
 use std::io::Read;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 pub mod domain;
 pub mod retoken;
@@ -21,10 +22,44 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
     return serde_json::from_str(&data).expect("error file");
 }
 
+fn transpile(path: &mut PathBuf) -> SirProgram {
+    let mut sir_program = SirProgram::default();
+    let vec = read_scie_data(&*path);
+    for token in &vec[0].elements {
+        let last_token = token.scopes[token.scopes.len() - 1].as_str();
+        let mut next_to_last = "";
+        if token.scopes.len() > 2 {
+            next_to_last = token.scopes[token.scopes.len() - 2].as_str();
+        }
+
+        match last_token {
+            "string.quoted.other.lt-gt.include.c" => {
+                sir_program.add_sir(Sir::Import(token.value.to_string()));
+            }
+            "entity.name.function.c" => match next_to_last {
+                "meta.function.definition.parameters.c" => {
+                    sir_program.create_function(token.value.to_string());
+                }
+                "meta.function-call.c" => {
+                    sir_program.create_stmt(token.value.clone());
+                }
+                _ => {}
+            },
+            "string.quoted.double.c" => {
+                println!("string: {:?}", token.value);
+            }
+            "punctuation.section.block.end.bracket.curly.c" => {
+                sir_program.done_function();
+            }
+            _ => {}
+        }
+    }
+    sir_program
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::read_scie_data;
-    use crate::simple_hir::{Sir, SirProgram};
+    use crate::transpile;
     use std::path::PathBuf;
 
     #[test]
@@ -32,37 +67,7 @@ mod tests {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("../_fixtures/c/hello.c.json");
 
-        let mut sir_program = SirProgram::default();
-        let vec = read_scie_data(&*path);
-        for token in &vec[0].elements {
-            let last_token = token.scopes[token.scopes.len() - 1].as_str();
-            let mut next_to_last = "";
-            if token.scopes.len() > 2 {
-                next_to_last = token.scopes[token.scopes.len() - 2].as_str();
-            }
-
-            match last_token {
-                "string.quoted.other.lt-gt.include.c" => {
-                    sir_program.add_sir(Sir::Import(token.value.to_string()));
-                }
-                "entity.name.function.c" => match next_to_last {
-                    "meta.function.definition.parameters.c" => {
-                        sir_program.create_function(token.value.to_string());
-                    }
-                    "meta.function-call.c" => {
-                        sir_program.create_stmt(token.value.clone());
-                    }
-                    _ => {}
-                },
-                "string.quoted.double.c" => {
-                    println!("string: {:?}", token.value);
-                }
-                "punctuation.section.block.end.bracket.curly.c" => {
-                    sir_program.done_function();
-                }
-                _ => {}
-            }
-        }
+        let sir_program = transpile(&mut path);
 
         println!("{:?}", sir_program);
     }
