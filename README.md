@@ -1,4 +1,4 @@
-# Movable DSL
+# Movable
 
 ![CI](https://github.com/charj-lang/movable/workflows/CI/badge.svg)
 
@@ -51,7 +51,10 @@ ast {
 
 ## Movable
 
-Movable is a DSL for save convert DSL
+Movable is a DSL for save convert DSL to common HIR or MIR.
+
+- HIR.
+- MIR.
 
 ### Syntax
 
@@ -89,6 +92,10 @@ struct/class/method DSL:
   expr `return {:?}`, 0
 .end method
 ```
+
+## Modernize
+
+Modernization is working for convert Movable generated code to Languages.
 
 ## Contributors
 
