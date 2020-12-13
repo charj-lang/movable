@@ -60,6 +60,12 @@ fn transpile(path: &mut PathBuf) -> SirProgram {
             "punctuation.terminator.statement.c" => {
                 sir_program.end_expr();
             }
+            "keyword.control.c" => {
+                match token.value.as_str() {
+                    "return" => {}
+                    _ => {}
+                };
+            }
             "punctuation.section.block.end.bracket.curly.c" => {
                 sir_program.done_function();
             }

@@ -2,7 +2,7 @@
 pub struct SirProgram {
     pub sirs: Vec<Sir>,
     last_func: SirFunction,
-    last_stmt: SirStatement,
+    last_stmt: SirInstruction,
     last_expr: SirExpression,
 }
 
@@ -11,7 +11,7 @@ impl Default for SirProgram {
         SirProgram {
             sirs: vec![],
             last_func: SirFunction::new(),
-            last_stmt: SirStatement::None,
+            last_stmt: SirInstruction::None,
             last_expr: SirExpression::None,
         }
     }
@@ -52,7 +52,7 @@ impl SirProgram {
             SirExpression::Call { .. } => {
                 self.last_func
                     .body
-                    .push(SirStatement::Expression(self.last_expr.clone()));
+                    .push(SirInstruction::Expression(self.last_expr.clone()));
             }
             SirExpression::None => {}
         }
@@ -70,7 +70,7 @@ pub struct SirFunction {
     pub name: String,
     pub params: Vec<SirParameter>,
     pub returns: Vec<SirParameter>,
-    pub body: Vec<SirStatement>,
+    pub body: Vec<SirInstruction>,
 }
 
 impl SirFunction {
@@ -97,12 +97,12 @@ pub struct SirArgument {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SirStatement {
-    Return(String),
+pub enum SirInstruction {
     Expression(SirExpression),
     None,
 }
 
+// todo: inline to instruction
 #[derive(Debug, PartialEq, Clone)]
 pub enum SirExpression {
     Call { name: String, args: Option<String> },
