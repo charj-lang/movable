@@ -41,7 +41,7 @@ fn transpile(path: &mut PathBuf) -> SirProgram {
                     sir_program.create_function(token.value.to_string());
                 }
                 "meta.function-call.c" => {
-                    sir_program.create_stmt(token.value.clone());
+                    sir_program.create_stmt(token.value.to_string());
                 }
                 _ => {}
             },
