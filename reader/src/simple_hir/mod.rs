@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 #[derive(Debug, PartialEq, Clone)]
 pub struct SirProgram {
     pub sirs: Vec<Sir>,
@@ -102,9 +104,27 @@ pub enum SirInstruction {
     None,
 }
 
-// todo: inline to instruction
 #[derive(Debug, PartialEq, Clone)]
 pub enum SirExpression {
     Call { name: String, args: Option<String> },
     None,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum CallType {
+    Positional(usize),
+    Keyword(usize),
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum SirInstr {
+    Import {
+        name: Option<String>,
+        symbols: Vec<String>,
+        level: usize,
+    },
+    CallFunction {
+        typ: CallType,
+    },
+    ReturnValue,
 }
