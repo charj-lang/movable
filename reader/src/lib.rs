@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate strum_macros;
 
-use crate::simple_hir::{Sir, SirProgram};
+use crate::simple_hir::{Sir, SirExpression, SirProgram};
 pub use scie_code_file::CodeFile;
 pub use scie_token_element::TokenElement;
 use std::fs::File;
@@ -41,12 +41,24 @@ fn transpile(path: &mut PathBuf) -> SirProgram {
                     sir_program.create_function(token.value.to_string());
                 }
                 "meta.function-call.c" => {
-                    sir_program.create_stmt(token.value.to_string());
+                    sir_program.create_expr(SirExpression::Call {
+                        name: token.value.to_string(),
+                        args: None,
+                    });
                 }
                 _ => {}
             },
             "string.quoted.double.c" => {
+                match next_to_last {
+                    "meta.function-call.c" => {
+                        sir_program.create_call_argument(token.value.to_string());
+                    }
+                    _ => {}
+                }
                 println!("string: {:?}", token.value);
+            }
+            "punctuation.terminator.statement.c" => {
+                sir_program.end_expr();
             }
             "punctuation.section.block.end.bracket.curly.c" => {
                 sir_program.done_function();

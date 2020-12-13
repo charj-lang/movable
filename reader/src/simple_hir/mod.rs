@@ -31,8 +31,31 @@ impl SirProgram {
         self.last_func.name = "".to_string();
     }
 
-    pub fn create_stmt(&mut self, name: String) {
-        self.last_func.name = name;
+    pub fn create_call_argument(&mut self, arg: String) {
+        match &self.last_expr {
+            SirExpression::Call { name, args: _ } => {
+                self.last_expr = SirExpression::Call {
+                    name: name.clone(),
+                    args: Some(arg),
+                }
+            }
+            SirExpression::None => {}
+        };
+    }
+
+    pub fn create_expr(&mut self, expr: SirExpression) {
+        self.last_expr = expr;
+    }
+
+    pub fn end_expr(&mut self) {
+        match &self.last_expr {
+            SirExpression::Call { .. } => {
+                self.last_func
+                    .body
+                    .push(SirStatement::Expression(self.last_expr.clone()));
+            }
+            SirExpression::None => {}
+        }
     }
 }
 
@@ -82,9 +105,6 @@ pub enum SirStatement {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SirExpression {
-    Builtin {
-        name: String,
-        parameters: Vec<SirArgument>,
-    },
+    Call { name: String, args: Option<String> },
     None,
 }
