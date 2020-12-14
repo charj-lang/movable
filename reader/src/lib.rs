@@ -23,7 +23,7 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
 }
 
 fn transpile(path: &mut PathBuf) -> SirProgram {
-    let mut sir_program = SirProgram::default();
+    let mut sir_program = SirProgram::new("main".to_string());
     let vec = read_scie_data(&*path);
     for token in &vec[0].elements {
         let last_token = token.scopes[token.scopes.len() - 1].as_str();

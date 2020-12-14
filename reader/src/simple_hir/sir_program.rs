@@ -1,25 +1,28 @@
 use crate::simple_hir::{Sir, SirExpression, SirFunction, SirInstruction};
+use core::fmt;
+use serde::export::Formatter;
+use std::fmt::Display;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SirProgram {
+    pub name: String,
     pub sirs: Vec<Sir>,
     last_func: SirFunction,
     last_stmt: SirInstruction,
     last_expr: SirExpression,
 }
 
-impl Default for SirProgram {
-    fn default() -> Self {
+impl SirProgram {
+    pub fn new(name: String) -> Self {
         SirProgram {
+            name,
             sirs: vec![],
             last_func: SirFunction::new(),
             last_stmt: SirInstruction::None,
             last_expr: SirExpression::None,
         }
     }
-}
 
-impl SirProgram {
     pub fn add_sir(&mut self, sir: Sir) {
         self.sirs.push(sir);
     }
@@ -58,5 +61,60 @@ impl SirProgram {
             }
             SirExpression::None => {}
         }
+    }
+
+    /// convert sir code to mir string in beautify way
+    pub fn codify(&self) {
+        //
+    }
+
+    /// `module` -> `module:`
+    fn module_name(&self) -> String {
+        format!("m_{}{}", self.name, ":")
+    }
+
+    /// `module` -> `module:`
+    fn colon(&self, name: &String) -> String {
+        format!("{}{}", name, ":")
+    }
+
+    /// `module` -> `module:`
+    fn p_func(&self, name: &String) -> String {
+        // self.sirs
+    }
+}
+
+impl Display for SirProgram {
+    #[allow(unused_must_use)]
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        let width = 10;
+        // <module_name>: module
+        let module_name = self.module_name();
+        writeln!(f, "{:w$} {}", module_name, "module", w = width);
+        // <space> export sieve
+        writeln!(f, "{:w$} export {}", "", self.name, w = width);
+
+        // func
+        writeln!(
+            f,
+            "{:w$} {}",
+            self.colon(&self.name),
+            self.p_func(),
+            w = width
+        );
+
+        // end module
+        writeln!(f, "{:w$} {}", "", "endmodule", w = width)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::simple_hir::SirProgram;
+
+    #[test]
+    fn should_println() {
+        let program = SirProgram::new(String::from("println"));
+        println!("{}", program);
     }
 }
