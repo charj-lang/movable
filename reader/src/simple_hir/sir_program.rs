@@ -79,29 +79,31 @@ impl SirProgram {
     }
 
     /// `module` -> `module:`
-    fn p_func(&self, name: &String) -> String {
-        // self.sirs
+    fn write_func(&self, f: &mut Formatter, width: usize) {
+        for sir in &self.sirs {
+            match sir {
+                Sir::Import(_) => {}
+                Sir::Function(func) => {
+                    writeln!(f, "{:w$} {}", func.name, "", w = width);
+
+                    writeln!(f, "{:w$} {}", "", "endfunc", w = width);
+                }
+            }
+        }
     }
 }
 
 impl Display for SirProgram {
     #[allow(unused_must_use)]
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        let width = 10;
+        let width: usize = 10;
         // <module_name>: module
         let module_name = self.module_name();
         writeln!(f, "{:w$} {}", module_name, "module", w = width);
         // <space> export sieve
         writeln!(f, "{:w$} export {}", "", self.name, w = width);
 
-        // func
-        writeln!(
-            f,
-            "{:w$} {}",
-            self.colon(&self.name),
-            self.p_func(),
-            w = width
-        );
+        self.write_func(f, width);
 
         // end module
         writeln!(f, "{:w$} {}", "", "endmodule", w = width)
