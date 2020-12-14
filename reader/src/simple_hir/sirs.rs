@@ -10,14 +10,25 @@ pub enum Sir {
 pub struct SirFunction {
     pub name: String,
     pub params: Vec<SirParameter>,
-    pub returns: Vec<SirParameter>,
+    pub returns: Vec<String>,
     pub body: Vec<SirInstruction>,
 }
 
-impl SirFunction {
-    pub fn new() -> Self {
+impl Default for SirFunction {
+    fn default() -> Self {
         SirFunction {
             name: "".to_string(),
+            params: vec![],
+            returns: vec![],
+            body: vec![],
+        }
+    }
+}
+
+impl SirFunction {
+    pub fn new(name: String) -> Self {
+        SirFunction {
+            name,
             params: vec![],
             returns: vec![],
             body: vec![],

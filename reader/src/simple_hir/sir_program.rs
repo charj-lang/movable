@@ -1,4 +1,4 @@
-use crate::simple_hir::{Sir, SirExpression, SirFunction, SirInstruction};
+use crate::simple_hir::{Sir, SirExpression, SirFunction, SirInstruction, SirParameter};
 use core::fmt;
 use serde::export::Formatter;
 use std::fmt::Display;
@@ -17,7 +17,7 @@ impl SirProgram {
         SirProgram {
             name,
             sirs: vec![],
-            last_func: SirFunction::new(),
+            last_func: Default::default(),
             last_stmt: SirInstruction::None,
             last_expr: SirExpression::None,
         }
@@ -74,17 +74,37 @@ impl SirProgram {
     }
 
     /// `module` -> `module:`
+    #[allow(dead_code)]
     fn colon(&self, name: &String) -> String {
         format!("{}{}", name, ":")
     }
 
+    fn signature(&self, returns: &Vec<String>, params: &Vec<SirParameter>) -> String {
+        if params.len() == 0 {
+            return format!("{}{}", returns.join(""), "");
+        }
+        let parameters = String::from("");
+        for param in params {
+            // format!()
+        }
+        format!("{}{}", returns.join(""), parameters)
+    }
+
     /// `module` -> `module:`
+    #[allow(unused_must_use)]
     fn write_func(&self, f: &mut Formatter, width: usize) {
         for sir in &self.sirs {
             match sir {
                 Sir::Import(_) => {}
                 Sir::Function(func) => {
-                    writeln!(f, "{:w$} {}", func.name, "", w = width);
+                    writeln!(
+                        f,
+                        "{:w$} {} {}",
+                        self.colon(&func.name),
+                        "func",
+                        self.signature(&func.returns, &func.params),
+                        w = width
+                    );
 
                     writeln!(f, "{:w$} {}", "", "endfunc", w = width);
                 }
@@ -112,11 +132,28 @@ impl Display for SirProgram {
 
 #[cfg(test)]
 mod tests {
-    use crate::simple_hir::SirProgram;
+    use crate::simple_hir::{Sir, SirFunction, SirProgram};
 
     #[test]
-    fn should_println() {
-        let program = SirProgram::new(String::from("println"));
+    fn should_build_empty_app_modules() {
+        let program = SirProgram::new(String::from("app"));
+        assert_eq!(
+            "m_app:     module
+           export app
+           endmodule
+",
+            format!("{}", program)
+        );
+    }
+
+    #[test]
+    fn should_build_main() {
+        let mut program = SirProgram::new(String::from("app"));
+        let mut function = SirFunction::new(String::from("main"));
+        function.returns.push(String::from("int"));
+
+        program.sirs.push(Sir::Function(function));
         println!("{}", program);
+        // assert_eq!("", format!("{}", program));
     }
 }
