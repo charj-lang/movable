@@ -53,45 +53,16 @@ ast {
 
 Movable is a DSL for save convert DSL to common HIR or MIR.
 
-- HIR.
-- MIR.
+- Tier 1. HIR, Java, JavaScript, Golang
+- Tier 2. MIR, C/C++, Rust
 
-### Syntax
+### HIR
 
-symbol match dsl
+Todo, thinking in based Python Bytecode.
 
-1. read target language DSL file
-   - MVP version, with **yaml**
-   - production version, with **DSL**
-2. read code tokenizer json
-3. convert to struct DSL as MIR???
-4. convert to language
+### MIR or Sir
 
-```
-type {
-   int "int"
-   uint "unit"
-   float "float"
-}
-```
-
-struct/class/method DSL:
-
-```
-.method <return-type> <method-name>()
-  // sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;
-  // const-string	v1, "Hello World!"
-  // invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V 
-  expr `{:?}("hello, world!");`, "print"
-  block {
-     stmt "if"
-     cond "a > b"
-     expr `return {:?}`, 0
-  }
-
-  expr `return {:?}`, 0
-.end method
-```
+todo: thinking based on [https://github.com/vnmakarov/mir](https://github.com/vnmakarov/mir)
 
 ## Modernize
 
