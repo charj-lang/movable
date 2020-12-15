@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/charj-lang/movable/workflows/CI/badge.svg)
 
-Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](github.com/phodal/scie/).
+Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](https://github.com/charj-lang/scie).
 
 - structure organization
 - inheritance
