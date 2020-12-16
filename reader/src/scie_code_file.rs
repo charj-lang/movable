@@ -1,6 +1,8 @@
-use crate::TokenElement;
-use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
+
+use serde::{Deserialize, Serialize};
+
+use crate::TokenElement;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct CodeFile {

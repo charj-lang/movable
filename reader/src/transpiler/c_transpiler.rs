@@ -1,16 +1,13 @@
-use std::path::PathBuf;
-
-use crate::read_scie_data;
 use crate::simple_hir::{Sir, SirExpression, SirProgram};
 use crate::transpiler::Transpiler;
+use crate::CodeFile;
 
 pub struct CTranspiler {}
 
 impl Transpiler for CTranspiler {
-    fn transpile(path: &mut PathBuf) -> SirProgram {
+    fn transpile(self, code_files: Vec<CodeFile>) -> SirProgram {
         let mut sir_program = SirProgram::new("main".to_string());
-        let vec = read_scie_data(&*path);
-        for token in &vec[0].elements {
+        for token in &code_files[0].elements {
             let last_token = token.scopes[token.scopes.len() - 1].as_str();
             let mut next_to_last = "";
             if token.scopes.len() > 2 {
