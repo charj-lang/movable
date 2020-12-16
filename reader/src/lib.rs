@@ -13,6 +13,7 @@ pub mod retoken;
 pub mod scie_code_file;
 pub mod scie_token_element;
 pub mod simple_hir;
+pub mod transpiler;
 
 pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
     let mut file = File::open(path).unwrap();
@@ -88,5 +89,7 @@ mod tests {
         let sir_program = transpile(&mut path);
 
         println!("{:?}", sir_program);
+
+        assert_eq!("main", sir_program.name);
     }
 }

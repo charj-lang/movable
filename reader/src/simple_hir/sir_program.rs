@@ -85,8 +85,9 @@ impl SirProgram {
         }
         let parameters = String::from("");
         for param in params {
-            // format!()
+            println!("todo: add param {:?}", param);
         }
+
         format!("{}{}", returns.join(""), parameters)
     }
 
@@ -97,12 +98,13 @@ impl SirProgram {
             match sir {
                 Sir::Import(_) => {}
                 Sir::Function(func) => {
+                    let signature = self.signature(&func.returns, &func.params);
                     writeln!(
                         f,
                         "{:w$} {} {}",
                         self.colon(&func.name),
                         "func",
-                        self.signature(&func.returns, &func.params),
+                        signature,
                         w = width
                     );
 
