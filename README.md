@@ -72,7 +72,7 @@ todo: thinking based on [https://github.com/vnmakarov/mir](https://github.com/vn
             - type
         - instructions
             - opcode
-                - immediateg
+                - immediate
                     - 64-bit integer
                     - float
                     - double
