@@ -9,7 +9,7 @@ pub use scie_code_file::CodeFile;
 pub use scie_token_element::TokenElement;
 
 use crate::simple_hir::SirProgram;
-use crate::transpiler::{CTranspiler, Transpiler};
+use crate::transpiler::transpiler_dispatcher;
 
 pub mod domain;
 pub mod retoken;
@@ -29,7 +29,7 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
 fn reader(path: &mut PathBuf) -> SirProgram {
     let vec = read_scie_data(&*path);
 
-    let transpiler = CTranspiler {};
+    let transpiler = transpiler_dispatcher("c");
     transpiler.transpile(vec)
 }
 

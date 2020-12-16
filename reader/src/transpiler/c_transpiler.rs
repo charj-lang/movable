@@ -5,7 +5,7 @@ use crate::CodeFile;
 pub struct CTranspiler {}
 
 impl Transpiler for CTranspiler {
-    fn transpile(self, code_files: Vec<CodeFile>) -> SirProgram {
+    fn transpile(&self, code_files: Vec<CodeFile>) -> SirProgram {
         let mut sir_program = SirProgram::new("main".to_string());
         for token in &code_files[0].elements {
             let last_token = token.scopes[token.scopes.len() - 1].as_str();
