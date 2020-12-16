@@ -2,7 +2,8 @@
 
 ![CI](https://github.com/charj-lang/movable/workflows/CI/badge.svg)
 
-Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert by [Scie](https://github.com/charj-lang/scie).
+Movable (from Movable Type（in Chinese: 活字印刷术）) is a intermedia DSL for description tokens which convert
+by [Scie](https://github.com/charj-lang/scie).
 
 - structure organization
 - inheritance
@@ -63,6 +64,25 @@ Todo, thinking in based Python Bytecode.
 ### MIR or Sir
 
 todo: thinking based on [https://github.com/vnmakarov/mir](https://github.com/vnmakarov/mir)
+
+- modules
+    - functions
+        - signature
+        - local variables
+            - type
+        - instructions
+            - opcode
+                - immediateg
+                    - 64-bit integer
+                    - float
+                    - double
+                    - long double
+                - memory
+                    - type
+                    - displacement
+                - label
+                - reference
+            - operands
 
 ## Modernize
 
