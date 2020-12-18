@@ -1,0 +1,560 @@
+[
+  {
+    "path": "../examples/java/HelloWorld.java",
+    "name": "HelloWorld.java",
+    "elements": [
+      {
+        "line_num": 1,
+        "start_index": 0,
+        "pos": "1:0-6",
+        "end_index": 6,
+        "value": "public",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "storage.modifier.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 6,
+        "pos": "1:6-7",
+        "end_index": 7,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 7,
+        "pos": "1:7-12",
+        "end_index": 12,
+        "value": "class",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.identifier.java",
+          "storage.modifier.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 12,
+        "pos": "1:12-13",
+        "end_index": 13,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.identifier.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 13,
+        "pos": "1:13-23",
+        "end_index": 23,
+        "value": "HelloWorld",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.identifier.java",
+          "entity.name.type.class.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 23,
+        "pos": "1:23-24",
+        "end_index": 24,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java"
+        ]
+      },
+      {
+        "line_num": 1,
+        "start_index": 24,
+        "pos": "1:24-25",
+        "end_index": 25,
+        "value": "{",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "punctuation.section.class.begin.bracket.curly.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 0,
+        "pos": "2:0-4",
+        "end_index": 4,
+        "value": "    ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 4,
+        "pos": "2:4-10",
+        "end_index": 10,
+        "value": "public",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "storage.modifier.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 10,
+        "pos": "2:10-11",
+        "end_index": 11,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 11,
+        "pos": "2:11-17",
+        "end_index": 17,
+        "value": "static",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "storage.modifier.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 17,
+        "pos": "2:17-18",
+        "end_index": 18,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 18,
+        "pos": "2:18-22",
+        "end_index": 22,
+        "value": "void",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.return-type.java",
+          "storage.type.primitive.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 22,
+        "pos": "2:22-23",
+        "end_index": 23,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 23,
+        "pos": "2:23-27",
+        "end_index": 27,
+        "value": "main",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "entity.name.function.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 27,
+        "pos": "2:27-28",
+        "end_index": 28,
+        "value": "(",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "punctuation.definition.parameters.begin.bracket.round.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 28,
+        "pos": "2:28-34",
+        "end_index": 34,
+        "value": "String",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "storage.type.object.array.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 34,
+        "pos": "2:34-35",
+        "end_index": 35,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 35,
+        "pos": "2:35-36",
+        "end_index": 36,
+        "value": "[",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "punctuation.bracket.square.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 36,
+        "pos": "2:36-37",
+        "end_index": 37,
+        "value": "]",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "punctuation.bracket.square.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 37,
+        "pos": "2:37-41",
+        "end_index": 41,
+        "value": "args",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "variable.parameter.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 41,
+        "pos": "2:41-42",
+        "end_index": 42,
+        "value": ")",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.identifier.java",
+          "punctuation.definition.parameters.end.bracket.round.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 42,
+        "pos": "2:42-43",
+        "end_index": 43,
+        "value": " ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java"
+        ]
+      },
+      {
+        "line_num": 2,
+        "start_index": 43,
+        "pos": "2:43-44",
+        "end_index": 44,
+        "value": "{",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "punctuation.section.method.begin.bracket.curly.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 0,
+        "pos": "3:0-7",
+        "end_index": 7,
+        "value": "       ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 7,
+        "pos": "3:7-13",
+        "end_index": 13,
+        "value": "System",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "variable.other.object.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 13,
+        "pos": "3:13-14",
+        "end_index": 14,
+        "value": ".",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "punctuation.separator.period.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 14,
+        "pos": "3:14-17",
+        "end_index": 17,
+        "value": "out",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "variable.other.object.property.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 17,
+        "pos": "3:17-18",
+        "end_index": 18,
+        "value": ".",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "punctuation.separator.period.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 18,
+        "pos": "3:18-25",
+        "end_index": 25,
+        "value": "println",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "entity.name.function.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 25,
+        "pos": "3:25-26",
+        "end_index": 26,
+        "value": "(",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "punctuation.definition.parameters.begin.bracket.round.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 26,
+        "pos": "3:26-27",
+        "end_index": 27,
+        "value": "\"",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "string.quoted.double.java",
+          "punctuation.definition.string.begin.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 27,
+        "pos": "3:27-38",
+        "end_index": 38,
+        "value": "Hello World",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "string.quoted.double.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 38,
+        "pos": "3:38-39",
+        "end_index": 39,
+        "value": "\"",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "string.quoted.double.java",
+          "punctuation.definition.string.end.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 39,
+        "pos": "3:39-40",
+        "end_index": 40,
+        "value": ")",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "meta.method-call.java",
+          "punctuation.definition.parameters.end.bracket.round.java"
+        ]
+      },
+      {
+        "line_num": 3,
+        "start_index": 40,
+        "pos": "3:40-41",
+        "end_index": 41,
+        "value": ";",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java",
+          "punctuation.terminator.java"
+        ]
+      },
+      {
+        "line_num": 4,
+        "start_index": 0,
+        "pos": "4:0-4",
+        "end_index": 4,
+        "value": "    ",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "meta.method.body.java"
+        ]
+      },
+      {
+        "line_num": 4,
+        "start_index": 4,
+        "pos": "4:4-5",
+        "end_index": 5,
+        "value": "}",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "meta.class.body.java",
+          "meta.method.java",
+          "punctuation.section.method.end.bracket.curly.java"
+        ]
+      },
+      {
+        "line_num": 5,
+        "start_index": 0,
+        "pos": "5:0-1",
+        "end_index": 1,
+        "value": "}",
+        "scopes": [
+          "source.java",
+          "meta.class.java",
+          "punctuation.section.class.end.bracket.curly.java"
+        ]
+      }
+    ]
+  }
+]

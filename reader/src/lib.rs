@@ -26,10 +26,10 @@ pub fn read_scie_data(path: &Path) -> Vec<CodeFile> {
     return serde_json::from_str(&data).expect("error file");
 }
 
-fn reader(path: &mut PathBuf) -> SirProgram {
+fn reader(path: &mut PathBuf, lang: &str) -> SirProgram {
     let vec = read_scie_data(&*path);
 
-    let transpiler = transpiler_dispatcher("c");
+    let transpiler = transpiler_dispatcher(lang);
     transpiler.transpile(vec)
 }
 
@@ -40,13 +40,23 @@ mod tests {
     use crate::reader;
 
     #[test]
-    fn should_build_first_file() {
+    fn should_build_first_c_file() {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("../_fixtures/c/hello.c.json");
 
-        let sir_program = reader(&mut path);
+        let sir_program = reader(&mut path, "c");
 
         println!("{:?}", sir_program);
+
+        assert_eq!("main", sir_program.name);
+    }
+
+    #[test]
+    fn should_build_first_java_file() {
+        let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        path.push("../_fixtures/java/hello.java.json");
+
+        let sir_program = reader(&mut path, "java");
 
         assert_eq!("main", sir_program.name);
     }
