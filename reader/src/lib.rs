@@ -46,8 +46,6 @@ mod tests {
 
         let sir_program = reader(&mut path, "c");
 
-        println!("{:?}", sir_program);
-
         assert_eq!("main", sir_program.name);
     }
 
@@ -57,6 +55,8 @@ mod tests {
         path.push("../_fixtures/java/hello.java.json");
 
         let sir_program = reader(&mut path, "java");
+
+        println!("{:?}", sir_program);
 
         assert_eq!("main", sir_program.name);
     }

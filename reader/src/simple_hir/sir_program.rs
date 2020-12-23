@@ -1,4 +1,4 @@
-use crate::simple_hir::{Sir, SirExpression, SirFunction, SirInstruction, SirParameter};
+use crate::simple_hir::{Sir, SirExpression, SirFunction, SirInstruction, SirParameter, SirStruct};
 use core::fmt;
 use serde::export::Formatter;
 use std::fmt::Display;
@@ -7,6 +7,7 @@ use std::fmt::Display;
 pub struct SirProgram {
     pub name: String,
     pub sirs: Vec<Sir>,
+    last_struct: SirStruct,
     last_func: SirFunction,
     last_stmt: SirInstruction,
     last_expr: SirExpression,
@@ -17,6 +18,7 @@ impl SirProgram {
         SirProgram {
             name,
             sirs: vec![],
+            last_struct: Default::default(),
             last_func: Default::default(),
             last_stmt: SirInstruction::None,
             last_expr: SirExpression::None,
@@ -32,7 +34,12 @@ impl SirProgram {
     }
 
     pub fn create_class(&mut self, name: String) {
-        // self.last_func.name = name;
+        self.last_struct.name = name;
+    }
+
+    pub fn end_class(&mut self) {
+        self.sirs.push(Sir::Struct(self.last_struct.clone()));
+        self.last_struct.name = "".to_string();
     }
 
     pub fn done_function(&mut self) {
@@ -114,6 +121,7 @@ impl SirProgram {
 
                     writeln!(f, "{:w$} {}", "", "endfunc", w = width);
                 }
+                Sir::Struct(stt) => {}
             }
         }
     }

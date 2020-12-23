@@ -4,6 +4,22 @@ use serde::{Deserialize, Serialize};
 pub enum Sir {
     Import(String),
     Function(SirFunction),
+    Struct(SirStruct),
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct SirStruct {
+    pub name: String,
+    pub func: Vec<SirFunction>,
+}
+
+impl Default for SirStruct {
+    fn default() -> Self {
+        SirStruct {
+            name: "".to_string(),
+            func: vec![],
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]

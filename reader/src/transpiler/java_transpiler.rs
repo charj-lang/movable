@@ -18,6 +18,9 @@ impl Transpiler for JavaTranspiler {
                 "entity.name.type.class.java" => {
                     sir_program.create_class(token.value.to_string());
                 }
+                "punctuation.section.class.end.bracket.curly.java" => {
+                    sir_program.end_class();
+                }
                 _ => {
                     // println!("{:?}", last_token);
                 }
