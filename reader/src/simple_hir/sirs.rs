@@ -8,6 +8,53 @@ pub enum Sir {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+pub enum SirInstruction {
+    Expression(SirExpression),
+    None,
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum SirExpression {
+    MemberAccess {
+        value: Box<SirExpression>,
+        name: String,
+    },
+    Call {
+        name: String,
+        args: Option<String>,
+    },
+    String {
+        value: String,
+    },
+    None,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum StringGroup {
+    Constant { value: String },
+    FormattedValue {},
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum CallType {
+    Positional(usize),
+    Keyword(usize),
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum SirInstr {
+    Import {
+        name: Option<String>,
+        symbols: Vec<String>,
+        level: usize,
+    },
+    CallFunction {
+        typ: CallType,
+    },
+    ReturnValue,
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub struct SirStruct {
     pub name: String,
     pub func: Vec<SirFunction>,
@@ -62,51 +109,4 @@ pub struct SirParameter {
 #[derive(Debug, PartialEq, Clone)]
 pub struct SirArgument {
     pub name: String,
-}
-
-#[derive(Debug, PartialEq, Clone)]
-pub enum SirInstruction {
-    Expression(SirExpression),
-    None,
-}
-
-#[derive(Debug, PartialEq, Clone)]
-pub enum SirExpression {
-    MemberAccess {
-        value: Box<SirExpression>,
-        name: String,
-    },
-    Call {
-        name: String,
-        args: Option<String>,
-    },
-    String {
-        value: String,
-    },
-    None,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub enum StringGroup {
-    Constant { value: String },
-    FormattedValue {},
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub enum CallType {
-    Positional(usize),
-    Keyword(usize),
-}
-
-#[derive(Debug, PartialEq, Clone)]
-pub enum SirInstr {
-    Import {
-        name: Option<String>,
-        symbols: Vec<String>,
-        level: usize,
-    },
-    CallFunction {
-        typ: CallType,
-    },
-    ReturnValue,
 }
