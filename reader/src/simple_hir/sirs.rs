@@ -72,8 +72,24 @@ pub enum SirInstruction {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SirExpression {
-    Call { name: String, args: Option<String> },
+    MemberAccess {
+        value: Box<SirExpression>,
+        name: String,
+    },
+    Call {
+        name: String,
+        args: Option<String>,
+    },
+    String {
+        value: String,
+    },
     None,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum StringGroup {
+    Constant { value: String },
+    FormattedValue {},
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
