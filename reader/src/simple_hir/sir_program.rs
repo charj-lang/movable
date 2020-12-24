@@ -42,7 +42,7 @@ impl SirProgram {
         self.last_struct.name = "".to_string();
     }
 
-    pub fn done_function(&mut self) {
+    pub fn end_function(&mut self) {
         self.sirs.push(Sir::Function(self.last_func.clone()));
         self.last_func.name = "".to_string();
     }

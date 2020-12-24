@@ -49,7 +49,7 @@ impl Transpiler for CTranspiler {
                     };
                 }
                 "punctuation.section.block.end.bracket.curly.c" => {
-                    sir_program.done_function();
+                    sir_program.end_function();
                 }
                 _ => {}
             }
