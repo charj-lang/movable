@@ -24,6 +24,12 @@ impl Transpiler for JavaTranspiler {
                 "punctuation.section.method.end.bracket.curly.java" => {
                     sir_program.end_function();
                 }
+                "variable.other.object.java" => {
+                    // todo: make proc name
+                }
+                "variable.other.object.property.java" => {
+                    // todo: make proc name
+                }
                 "punctuation.section.class.end.bracket.curly.java" => {
                     sir_program.end_class();
                 }
